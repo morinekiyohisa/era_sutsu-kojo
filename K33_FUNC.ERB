@@ -1,0 +1,15 @@
+﻿;----------
+;連続コマンド時に口上が被らないようにする関数
+;暫定的に10まで対応
+;----------
+@KABURAND(ARG)
+#FUNCTION
+#DIM RVALUE
+SIF ARG <= 1
+	RETURNF 0
+
+RVALUE = RAND:ARG
+SIF CFLAG:カブランド == RVALUE
+	RESTART
+CFLAG:カブランド = RVALUE
+RETURNF RVALUE
