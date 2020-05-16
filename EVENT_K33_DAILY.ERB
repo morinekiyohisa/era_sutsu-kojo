@@ -29,16 +29,22 @@ CASE "朝駆け"
 	CASE "朝騎乗位"
 		IF TALENT:ARG:恋慕 && TALENT:ARG:淫乱 && ABL:ARG:奉仕精神 > 8 && RAND:2
 			CALL SETFLAG, "地の文スキップ"
-			PRINTFORMW ふと目が覚めると、妙に股間がもどかしい…
-			PRINTFORMW 下半身に目をやると、%CALLNAME:ARG%が%CALLNAME:MASTER%のペニスから溢れ出す先走り汁をペロペロと舐め取っていた…
+			PRINTFORMW 眼睛睜開時、突然感覺到股間有種奇妙的感覺
+			;TranslatedMark ふと目が覚めると、妙に股間がもどかしい…
+			PRINTFORMW 看了看下半身、%CALLNAME:ARG%在舔%CALLNAME:MASTER%的陰莖流出來的先走汁……
+			;TranslatedMark 下半身に目をやると、%CALLNAME:ARG%が%CALLNAME:MASTER%のペニスから溢れ出す先走り汁をペロペロと舐め取っていた…
 			PRINTL
 			CALL REPRINT_MAIDFACE, "甘い言葉", ARG
-			PRINTFORMW 「あ、%CNAMET(ARG, "二人称")%…おはようございます……」
-			PRINTFORMW 「%CNAMET(ARG, "二人称")%がなかなかおきてくれないので、%CNAMET(ARG, "二人称")%のおちんちんであそんでました……」
+			PRINTFORMW 「啊、%CNAMET(ARG, "二人称")%…早上好……」
+			;TranslatedMark 「あ、%CNAMET(ARG, "二人称")%…おはようございます……」
+			PRINTFORMW 「%CNAMET(ARG, "二人称")%一直不起來、就先跟%CNAMET(ARG, "二人称")%的雞雞玩了……」」
+			;TranslatedMark 「%CNAMET(ARG, "二人称")%がなかなかおきてくれないので、%CNAMET(ARG, "二人称")%のおちんちんであそんでました……」
 			PRINTL
-			PRINTFORMW %CALLNAME:ARG%は微笑みながら両手で%CALLNAME:MASTER%のペニスを激しく扱くと、あと少しというところで動きを止めてしまった…
+			PRINTFORMW %CALLNAME:ARG%は一邊微笑一邊用手幫%CALLNAME:MASTER%の手淫、但在即將要射精之前便停下了手…
+			;TranslatedMark %CALLNAME:ARG%は微笑みながら両手で%CALLNAME:MASTER%のペニスを激しく扱くと、あと少しというところで動きを止めてしまった…
 			PRINTL
-			PRINTFORMW 「こうやってびくびくーってなると、おちんちんからヌルヌルがいっぱい出てきます……」
+			PRINTFORMW 「如果雞雞這樣抖動的話、就會射出很多喔……」
+			;TranslatedMark 「こうやってびくびくーってなると、おちんちんからヌルヌルがいっぱい出てきます……」
 			CALL PRINT_STR, @"「ふふ…%CNAMET(ARG, "一人称")%とおそろいですね……_BHH_」_W"
 			PRINTL
 			PRINTFORMW %CALLNAME:ARG%は%CALLNAME:MASTER%の股間の上に跨ると、%CALLNAME:MASTER%見せ付けるように%TEXTR("小さな/幼い")%%TEXTR("膣/性器")%をくぱぁと開いた…
@@ -84,7 +90,7 @@ CASE "朝駆け"
 			PRINTFORML
 			CALL PRINT_STR, "「あっ、はぁ……ああぁぁっ_BHH_BHH_」_W"
 			PRINTFORML 悩ましい光景に%CALLNAME:MASTER%はペニスをビクッと震わせると、いい場所に当たったのか
-			PRINTFORMW %CALLNAME:ARG%は身体を震わせながらピュっと軽く潮を吹いてから、目が覚めている%CALLNAME:MASTER%と目が合った。 
+			PRINTFORMW %CALLNAME:ARG%は身体を震わせながらピュっと軽く潮を吹いてから、目が覚めている%CALLNAME:MASTER%と目が合った。
 			PRINTL 
 			IF EXP_GAIN("射精経験", MASTER)
 				CALL PRINT_STR, @"「お、おはようございます、%CNAMET(ARG, "二人称")%……_／／／_」_W"
@@ -701,7 +707,7 @@ CASE "股間観察失敗"
 		PRINTFORML %CALLNAME:TARGET%との距離が少し遠くなった…
 CASE "陰核愛撫"
 	CALL PRINT_STR, @"「はーっ…はーっ…_BHH_」_L"
-	PRINTFORML %CALLNAME:TARGET%は解放されたクリトリスをピクピク震わせている… 
+	PRINTFORML %CALLNAME:TARGET%は解放されたクリトリスをピクピク震わせている…
 CASE "指挿れ"
 	CALL PRINT_STR, @"「んひぃ_BHH_！う、うぅ……」_L"
 	PRINTFORML 吸い付いてくる%CALLNAME:TARGET%の膣穴から指を引き抜くと、ちゅぽん！と小気味良い音が鳴った…
