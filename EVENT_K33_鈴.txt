@@ -93,7 +93,7 @@
 %CALLNAME:MASTER%は%CALLNAME:TARGET%を抱き寄せると、頭を撫でながら優しく口付けをした…	%CALLNAME:MASTER%將%CALLNAME:TARGET%抱緊、一邊摸著頭一邊輕吻…
 「ぷはぁ、はぁ…ふぅ……」	「哈…哈…呼…」
 「あまりよくわからないですけど…なんとなく%CNAME("二人称")%のやさしさが伝わってきます……」	「雖然不大明白…但是%CNAME("二人称")%的溫柔已經傳達給我了……」
-%CALLNAME:MASTER%は%CALLNAME:TARGET%の股間に手を滑り込ませ、性器の形を確かめるように撫でまわした
+%CALLNAME:MASTER%は%CALLNAME:TARGET%の股間に手を滑り込ませ、性器の形を確かめるように撫でまわした	%CALLNAME:MASTER%摸了摸%CALLNAME:TARGET%的股間、像是要確認性器形狀一樣
 ツルツルで肌触りがよく、ぷにぷにで気持ちが良い触感だ…	良好的肌膚觸感、真棒…
 「あ…や、やだ…う、うぅ……」	「啊…不、不要…嗯……」
 恥ずかしさからか%CALLNAME:TARGET%は性器を触られている腕をギュっと掴み、足を閉じて抵抗していたが	也許由於尷尬，%CALLNAME:TARGET%抓住了被性器觸碰的手臂，並合起雙腿以抵抗。
@@ -141,3 +141,10 @@
 「や、やだ…んぅっ！_BHH_  や、やめ…んっ_BHH_  やめてくうぅっ！_BHH_  や、やぁあっ！_BHH_」_W	「不、不要…啊！_BHH_  別、別這樣…啊_BHH_  停下來啊！_BHH_  不、不要！_BHH_」_W
 「あっ…あっ_BHH_  %CNAME("二人称", "どもり")%…ぅ、あ、あぁっ_BHH_」	「啊…啊_BHH_  %CNAME("二人称", "どもり")%…、啊、啊啊_BHH_」
 「%CNAME("二人称")%のおちんちんさん…、%TEXTR("今日もよろしくです/いつもありがとうです/おいしそうです")%……_BHH_  んっ…」_W	「%CNAME("二人称")%的雞巴…、%TEXTR("今天也請多多指教/平常受你照顧了/好像很美味")%……_BHH_  んっ…」_W
+%CALLNAME:MASTER%は不意に%CALLNAME:TARGET%を抱き寄せて、優しく口付けをした…	%CALLNAME:MASTER%突然抱住%CALLNAME:TARGET%並輕吻了%CALLNAME:TARGET%…
+「んっ！…ぷはぁ……」	「呀！…哈……」
+「ひどいです、%CNAME("二人称")%…」	「太過分了、%CNAME("二人称")%…」
+「どうせしてくれるなら、おちんちんより…先にしてほしかったです……」	「比起雞巴…我更希望初吻是你的嘴唇……」
+もはや%CALLNAME:TARGET%は抵抗というより、縋るように%CALLNAME:MASTER%の腕を抱きしめている…	%CALLNAME:TARGET%不再抵抗，而是緊緊抓住著%CALLNAME:MASTER%的雙臂…
+先に普通のキスをする/ペニスにファーストキスしてほしい	先來個普通的親吻/讓陰莖成為她的初吻對象
+%CALLNAME:TARGET%は[Ｖ性向]を得た	%CALLNAME:TARGET%獲得[Ｖ性向]
