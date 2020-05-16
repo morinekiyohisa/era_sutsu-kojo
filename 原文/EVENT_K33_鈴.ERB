@@ -1,197 +1,197 @@
-﻿;-------------------------------------------------
-;鈴口上_2019_12_18
-;製作者　くらど
+;-------------------------------------------------
+;�����_2019_12_18
+;����ҁ@�����
 ;-------------------------------------------------
 ;-------------------------------------------------
-;突発的な部員加入なので紹介イベントはなし　（形式上は）普通の人間なので
-;紹介タイミングで「そういえば最近、部室の前が汚れてるんですが…学校での露出プレイは程々にしてくださいね」的な事を言わせようかとも思ったけど
-;初回で引いたら矛盾するので結局やめた
+;�˔��I�ȕ��������Ȃ̂ŏЉ�C�x���g�͂Ȃ��@�i�`����́j���ʂ̐l�ԂȂ̂�
+;�Љ�^�C�~���O�Łu���������΍ŋ߁A�����̑O������Ă��ł����c�w�Z�ł̘I�o�v���C�͒��X�ɂ��Ă��������ˁv�I�Ȏ������킹�悤���Ƃ��v��������
+;����ň������疵������̂Ō��ǂ�߂�
 ;-------------------------------------------------
-;呼び名の設定。"_"の右にふりがなを書く。
+;�Ăі��̐ݒ�B"_"�̉E�ɂӂ肪�Ȃ������B
 ;-------------------------------------------------
-;他のキャラを呼ぶ設定がまだ甘いかも
+;���̃L�������ĂԐݒ肪�܂��Â�����
 @CNAME_K33, ARGS
 #FUNCTIONS
 
 VARSET LOCALS
 
 SELECTCASE ARGS
-CASE "一人称"
-	;愛称として鈴_りんと呼ばれてもよい
-	LOCALS = 鈴_すず
-CASE "二人称"
-	;相手が主人
-	;恋慕とかのタイミングで口上側からお兄ちゃんorお兄様orご主人様呼びをさせたい
+CASE "��l��"
+	;���̂Ƃ��ė�_���ƌĂ΂�Ă��悢
+	LOCALS = ��_����
+CASE "��l��"
+	;���肪��l
+	;����Ƃ��̃^�C�~���O�Ō��㑤���炨�Z�����or���Z�lor����l�l�Ăт���������
 	IF PLAYER == MASTER
-		IF TALENT:MASTER:オトコ
-			LOCALS = お兄さん_おにいさん
+		IF TALENT:MASTER:�I�g�R
+			LOCALS = ���Z����_���ɂ�����
 		ELSE
-			LOCALS = お姉さん_おねえさん
+			LOCALS = ���o����_���˂�����
 		ENDIF
-	;相手が主人ではない
-	;同じ初等部ならちゃん、先生は先生、その他はさん
-	;いずれキャラによっては○○姉さんとか言わせてもおもしろいなあと思う
+	;���肪��l�ł͂Ȃ�
+	;�����������Ȃ炿���A�搶�͐搶�A���̑��͂���
+	;������L�����ɂ���Ắ����o����Ƃ����킹�Ă��������낢�Ȃ��Ǝv��
 	ELSE
-		SELECTCASE CSTR:ASSI:学年
-			CASE "初等部"
-				LOCALS = %CALLNAME:ASSI%ちゃん_%CALLNAME:ASSI%ちゃん
+		SELECTCASE CSTR:ASSI:�w�N
+			CASE "������"
+				LOCALS = %CALLNAME:ASSI%�����_%CALLNAME:ASSI%�����
 			CASEELSE
-				IF COND("教員", ASSI)
-					LOCALS = %CALLNAME:ASSI%先生_%CALLNAME:ASSI%せんせい
+				IF COND("����", ASSI)
+					LOCALS = %CALLNAME:ASSI%�搶_%CALLNAME:ASSI%���񂹂�
 				ELSE
-				LOCALS = %CALLNAME:ASSI%さん_%CALLNAME:ASSI%さん
+				LOCALS = %CALLNAME:ASSI%����_%CALLNAME:ASSI%����
 			ENDIF
 		ENDSELECT
 	ENDIF
-;"主人"と"助手"は三人称。主に当人と話していない時に使う
-CASE "主人"
-		IF TALENT:MASTER:オトコ
-			LOCALS = お兄さん_おにいさん
+;"��l"��"����"�͎O�l�́B��ɓ��l�Ƙb���Ă��Ȃ����Ɏg��
+CASE "��l"
+		IF TALENT:MASTER:�I�g�R
+			LOCALS = ���Z����_���ɂ�����
 		ELSE
-			LOCALS = お姉さん_おねえさん
+			LOCALS = ���o����_���˂�����
 		ENDIF
-CASE "助手"
-	LOCALS = %CALLNAME:ASSI%さん_%CALLNAME:ASSI%さん
+CASE "����"
+	LOCALS = %CALLNAME:ASSI%����_%CALLNAME:ASSI%����
 
-;たとえばデイリーであなたがフェリシエルにおっぱいリフトをしている時に見ている鈴のフェリシエルの呼び方を参照するやつ
-CASE "相手"
-	SELECTCASE CSTR:TARGET:学年
-		CASE "初等部"
-			LOCALS = %CALLNAME:TARGET%ちゃん_%CALLNAME:TARGET%ちゃん
+;���Ƃ��΃f�C���[�ł��Ȃ����t�F���V�G���ɂ����ς����t�g�����Ă��鎞�Ɍ��Ă����̃t�F���V�G���̌Ăѕ����Q�Ƃ�����
+CASE "����"
+	SELECTCASE CSTR:TARGET:�w�N
+		CASE "������"
+			LOCALS = %CALLNAME:TARGET%�����_%CALLNAME:TARGET%�����
 		CASEELSE
-			IF COND("教員", TARGET)
-				LOCALS = %CALLNAME:TARGET%先生_%CALLNAME:TARGET%せんせい
+			IF COND("����", TARGET)
+				LOCALS = %CALLNAME:TARGET%�搶_%CALLNAME:TARGET%���񂹂�
 			ELSE
-			LOCALS = %CALLNAME:TARGET%さん_%CALLNAME:TARGET%さん
+			LOCALS = %CALLNAME:TARGET%����_%CALLNAME:TARGET%����
 		ENDIF
 	ENDSELECT
-;リアラみたいに隠語テンプレ作りたい
+;���A���݂����ɉB��e���v����肽��
 ENDSELECT
 RETURNF LOCALS
 
 ;-------------------------------------------------
-;勧誘イベントのセリフや紹介文
-;ここではTARGETではなくARGとして呼ばれています
-;例えば、TALENT:恋慕を条件分に書く場合には TALENT:ARG:恋慕 としてください
+;���U�C�x���g�̃Z���t��Љ
+;�����ł�TARGET�ł͂Ȃ�ARG�Ƃ��ČĂ΂�Ă��܂�
+;�Ⴆ�΁ATALENT:������������ɏ����ꍇ�ɂ� TALENT:ARG:���� �Ƃ��Ă�������
 ;-------------------------------------------------
 @EVENT_PROFILE_K33, ARGS, ARG
 
 SELECTCASE ARGS
-CASE "紹介文"
-	PRINTFORML 初等部の学生。
-	PRINTFORML おいしそうなニオイに導かれて部室に辿りついたらしい。
-	PRINTFORML 本人は自分が何かの病気だと思っているが、
-	PRINTFORML 彼女の身体の中では尋常じゃないほどの精に対する欲求が渦巻いている。
+CASE "�Љ"
+	PRINTFORML �������̊w���B
+	PRINTFORML �����������ȃj�I�C�ɓ�����ĕ����ɒH������炵���B
+	PRINTFORML �{�l�͎����������̕a�C���Ǝv���Ă��邪�A
+	PRINTFORML �ޏ��̐g�̂̒��ł͐q�킶��Ȃ��قǂ̐��ɑ΂���~�����Q�����Ă���B
 
-;ここの中に限り、CFLAG,BASE,TALENT,ABL,EXP,CSTRをCSVに書いたものから変更させることが出来ます
-;例えばBASE:体力を2000にしたいなら BASE:0:体力 = 2000 、強気にさせたいなら TALENT:0:強気 = 1 として下さい
-;また、ABL:信頼を+2させたい場合には ABL:0:信頼 = ABL:ARG:信頼 + 2 と書いてください
+;�����̒��Ɍ���ACFLAG,BASE,TALENT,ABL,EXP,CSTR��CSV�ɏ��������̂���ύX�����邱�Ƃ��o���܂�
+;�Ⴆ��BASE:�̗͂�2000�ɂ������Ȃ� BASE:0:�̗� = 2000 �A���C�ɂ��������Ȃ� TALENT:0:���C = 1 �Ƃ��ĉ�����
+;�܂��AABL:�M����+2���������ꍇ�ɂ� ABL:0:�M�� = ABL:ARG:�M�� + 2 �Ə����Ă�������
 
-	;フェリシエル→%CALLNAME:FINDCHARA(NO, 1)%
-	;メモ：CNAMET(FINDCHARA(NO, 1)"二人称")%でフェリシエルの二人称を呼び出す
-CASE "勧誘"
+	;�t�F���V�G����%CALLNAME:FINDCHARA(NO, 1)%
+	;�����FCNAMET(FINDCHARA(NO, 1)"��l��")%�Ńt�F���V�G���̓�l�̂��Ăяo��
+CASE "���U"
 
 	PRINTFORML
-	PRINTFORMW 昼休みに%CALLNAME:MASTER%が部室に向かうと、部室の前で見覚えの無い少女が座り込んでいた。
-	PRINTFORMW 声をかけようとするが、その前に少女はパタリとその場で倒れてしまった……
+	PRINTFORMW ���x�݂�%CALLNAME:MASTER%�������Ɍ������ƁA�����̑O�Ō��o���̖������������荞��ł����B
+	PRINTFORMW ���������悤�Ƃ��邪�A���̑O�ɏ����̓p�^���Ƃ��̏�œ|��Ă��܂����c�c
 	PRINTFORML 
-	PRINTFORMW 『ご主人様、どうかしましたか？……って、何ですかこの床』
-	PRINTFORMW 既に部室にいたフェリシエルが出てくると、びしょ濡れの廊下を見てため息をついた。
-	PRINTFORMW 『ローショントラップですか、こんなイタズラには引っかかりませんよ？』
+	PRINTFORMW �w����l�l�A�ǂ������܂������H�c�c���āA���ł������̏��x
+	PRINTFORMW ���ɕ����ɂ����t�F���V�G�����o�Ă���ƁA�т���G��̘L�������Ă��ߑ��������B
+	PRINTFORMW �w���[�V�����g���b�v�ł����A����ȃC�^�Y���ɂ͈���������܂����H�x
 	PRINTFORML 
-	PRINTFORMW %CALLNAME:MASTER%が身に覚えの無い罪を着せられてキョトンとしていると、
-	PRINTFORMW 倒れている少女に気づいたフェリシエルは少し何かを考える素振りを見せ、
-	PRINTFORMW おもむろに倒れている少女のスカートを捲り上げた。
+	PRINTFORMW %CALLNAME:MASTER%���g�Ɋo���̖����߂𒅂����ăL���g���Ƃ��Ă���ƁA
+	PRINTFORMW �|��Ă��鏭���ɋC�Â����t�F���V�G���͏����������l����f�U��������A
+	PRINTFORMW �����ނ�ɓ|��Ă��鏭���̃X�J�[�g������グ���B
 	PRINTFORML 
-	PRINTFORMW 『見て下さいご主人様、普通じゃこんなのありえないですよ』
-	PRINTFORMW フェリシエルが捲り上げた少女のスカートの中では、
-	PRINTFORMW ぐしょぐしょになってるショーツの中から夥しい量の愛液が溢れ出ていた……
+	PRINTFORMW �w���ĉ���������l�l�A���ʂ��Ⴑ��Ȃ̂��肦�Ȃ��ł���x
+	PRINTFORMW �t�F���V�G��������グ�������̃X�J�[�g�̒��ł́A
+	PRINTFORMW �����傮����ɂȂ��Ă�V���[�c�̒�����삵���ʂ̈��t�����o�Ă����c�c
 	PRINTFORML
-	PRINTFORMW 『よくわからないですけど、とりあえずベッドで寝かせておきましょうか……』
-	PRINTFORMW 『ご主人様も手伝ってくれますよね？』
-	PRINTFORMW %CALLNAME:MASTER%はフェリシエルと協力して、少女をベッドで寝かせてから床の掃除をした……
+	PRINTFORMW �w�悭�킩��Ȃ��ł����ǁA�Ƃ肠�����x�b�h�ŐQ�����Ă����܂��傤���c�c�x
+	PRINTFORMW �w����l�l����`���Ă���܂���ˁH�x
+	PRINTFORMW %CALLNAME:MASTER%�̓t�F���V�G���Ƌ��͂��āA�������x�b�h�ŐQ�����Ă��珰�̑|���������c�c
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORMW ――しばらくすると少女は目を覚ました。
-	PRINTFORMW 「あれ？ここは何処ですか？%CNAMET(ARG, "一人称")%は一体何を……」
-	PRINTFORMW 『聞きたいのはこっちですよ……何で初等部の生徒がこんな所にいるんですか？』
-	PRINTFORMW %CALLNAME:MASTER%はここは自分の部活の部室であることを伝え、どうやってここに来たのかを尋ねた。
+	PRINTFORMW �\�\���΂炭����Ə����͖ڂ��o�܂����B
+	PRINTFORMW �u����H�����͉����ł����H%CNAMET(ARG, "��l��")%�͈�̉����c�c�v
+	PRINTFORMW �w���������̂͂������ł���c�c���ŏ������̐��k������ȏ��ɂ����ł����H�x
+	PRINTFORMW %CALLNAME:MASTER%�͂����͎����̕����̕����ł��邱�Ƃ�`���A�ǂ�����Ă����ɗ����̂���q�˂��B
 	PRINTFORML 
-	PRINTFORMW 「そういえば……なんだか、おいしそうなニオイがしたんです……その後は、頭がボーっとして……」
-	PRINTFORMW 『おいしそうなニオイですか、それが何のニオイかは分かるんですか？』
-	PRINTFORMW 少女は顔を真っ赤にしながら、やや俯きがちに答えた。
-	PRINTFORMW 「わからない……けど、多分、えっちなニオイ……だと、思います……」
-	PRINTFORMW 『ははぁ、えっちなニオイですか』
+	PRINTFORMW �u���������΁c�c�Ȃ񂾂��A�����������ȃj�I�C��������ł��c�c���̌�́A�����{�[���Ƃ��āc�c�v
+	PRINTFORMW �w�����������ȃj�I�C�ł����A���ꂪ���̃j�I�C���͕������ł����H�x
+	PRINTFORMW �����͊��^���Ԃɂ��Ȃ���A���낫�����ɓ������B
+	PRINTFORMW �u�킩��Ȃ��c�c���ǁA�����A�������ȃj�I�C�c�c���ƁA�v���܂��c�c�v
+	PRINTFORMW �w�͂͂��A�������ȃj�I�C�ł����x
 	PRINTFORML
-	PRINTFORMW 『まぁ、貴女のほうも相当えっちなニオイですけどね』
-	PRINTFORMW フェリシエルはベッドで寝ている少女のスカートを捲り上げた！
-	PRINTFORMW ぴったりと閉じたツルツルの幼いワレメからは、溢れんばかりの愛液が垂れ流れている…
-	CALL PRINT_STR, "「いやっ！見ないでください……」_W"
+	PRINTFORMW �w�܂��A�M���̂ق��������������ȃj�I�C�ł����ǂˁx
+	PRINTFORMW �t�F���V�G���̓x�b�h�ŐQ�Ă��鏭���̃X�J�[�g������グ���I
+	PRINTFORMW �҂�����ƕ����c���c���̗c������������́A����΂���̈��t�����ꗬ��Ă���c
+	CALL PRINT_STR, "�u������I���Ȃ��ł��������c�c�v_W"
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORMW 『ご主人様、どうしますか？この子、放っておくと大変なことになると思いますよ』
-	PRINTFORMW 『この子はほぼ人間ですが、僅かながら淫魔の力を感じますね』
-	PRINTFORMW 『おそらく淫魔に呪われているか、人間と淫魔の子か孫ってところでしょうね』
-	PRINTFORMW 『もし助けてあげるならどうしてあげたら良いかなんて……ご主人様ならお分かりですよね？』
+	PRINTFORMW �w����l�l�A�ǂ����܂����H���̎q�A�����Ă����Ƒ�ςȂ��ƂɂȂ�Ǝv���܂���x
+	PRINTFORMW �w���̎q�͂قڐl�Ԃł����A�͂��Ȃ�������̗͂������܂��ˁx
+	PRINTFORMW �w�����炭�����Ɏ���Ă��邩�A�l�Ԃƈ����̎q�������ĂƂ���ł��傤�ˁx
+	PRINTFORMW �w���������Ă�����Ȃ�ǂ����Ă�������ǂ����Ȃ�āc�c����l�l�Ȃ炨������ł���ˁH�x
 
-;これは別になくても構いません
-CASE "勧誘直後"
-	PRINTFORMW 『貴女にはとりあえず自分の名前と、床とベッドを汚した事の言い訳でも言ってもらいましょうか』
+;����͕ʂɂȂ��Ă��\���܂���
+CASE "���U����"
+	PRINTFORMW �w�M���ɂ͂Ƃ肠���������̖��O�ƁA���ƃx�b�h�����������̌�����ł������Ă��炢�܂��傤���x
 	PRINTFORML 
-	PRINTFORMW 「えっと……%CNAMET(ARG, "一人称")%は青空 鈴（あおぞら すず）って言います」
-	PRINTFORMW 「部室を汚してしまってごめんなさい……」
-	PRINTFORMW 「%CNAMET(ARG, "一人称")%のこの、えっと……えっちなお汁は、ここ最近でいっぱい溢れ出てくるようになっちゃって……」
-	PRINTFORMW 「努力はしてるんですが、自分じゃどうやっても治まらないんです……」
-	PRINTFORMW 「うぅ……%CNAMET(ARG, "一人称", "どもり")%はえっちじゃないのに……」
+	PRINTFORMW �u�����Ɓc�c%CNAMET(ARG, "��l��")%�͐� ��i�������� �����j���Č����܂��v
+	PRINTFORMW �u�����������Ă��܂��Ă��߂�Ȃ����c�c�v
+	PRINTFORMW �u%CNAMET(ARG, "��l��")%�̂��́A�����Ɓc�c�������Ȃ��`�́A�����ŋ߂ł����ς����o�Ă���悤�ɂȂ�������āc�c�v
+	PRINTFORMW �u�w�͂͂��Ă��ł����A��������ǂ�����Ă����܂�Ȃ���ł��c�c�v
+	PRINTFORMW �u�����c�c%CNAMET(ARG, "��l��", "�ǂ���")%�͂���������Ȃ��̂Ɂc�c�v
 	PRINTFORML 
-	PRINTFORMW 『大体は察しが付きました。もしかしたらご主人様なら、鈴ちゃんの病気を治せるかもしれませんよ？』
-	PRINTFORMW 「本当ですか？でも、一体どうやって……？」
-	PRINTFORMW 『昼休みの時間にここに来て、部活を見学すれば分かるようになりますよ』
-	PRINTFORMW 「……わかりました。じゃあ今度から昼休みになったらここに来ます」
+	PRINTFORMW �w��͎̂@�����t���܂����B�����������炲��l�l�Ȃ�A�邿���̕a�C�������邩������܂����H�x
+	PRINTFORMW �u�{���ł����H�ł��A��̂ǂ�����āc�c�H�v
+	PRINTFORMW �w���x�݂̎��Ԃɂ����ɗ��āA���������w����Ε�����悤�ɂȂ�܂���x
+	PRINTFORMW �u�c�c�킩��܂����B���Ⴀ���x���璋�x�݂ɂȂ����炱���ɗ��܂��v
 	PRINTFORML 
 
-CASE "出現条件"
-	PRINTFORMW ―%NAME:ARG%は部室に見学しに来るようになります。
+CASE "�o������"
+	PRINTFORMW �\%NAME:ARG%�͕����Ɍ��w���ɗ���悤�ɂȂ�܂��B
 	PRINTFORML 
-	PRINTFORMW 「ところで、下着は返してもらえないんでしょうか……」
-	PRINTFORMW 『洗濯して乾いたら返してあげるので今は諦めてください』
-	PRINTFORMW 『代わりといっては何ですが、ここにある下着なら好きなのを借りてもいいですよ？』
-	PRINTFORMW フェリシエルが開けた棚には、Ｈな下着が並んでいる……
-	PRINTFORMW 「うぅ……遠慮しておきます……」
+	PRINTFORMW �u�Ƃ���ŁA�����͕Ԃ��Ă��炦�Ȃ���ł��傤���c�c�v
+	PRINTFORMW �w���󂵂Ċ�������Ԃ��Ă�����̂ō��͒��߂Ă��������x
+	PRINTFORMW �w����Ƃ����Ă͉��ł����A�����ɂ��鉺���Ȃ�D���Ȃ̂��؂�Ă������ł���H�x
+	PRINTFORMW �t�F���V�G�����J�����I�ɂ́A�g�ȉ���������ł���c�c
+	PRINTFORMW �u�����c�c�������Ă����܂��c�c�v
 
-;初めて部室に顔を出した際のイベントや挨拶です。これも別に無くて構いません。
-CASE "初訪問"
-	;昼などの、勧誘して即現れた場合です。別にここで分岐させなくても良いと思いますが違和感が出る場合にはどうぞ
+;���߂ĕ����Ɋ���o�����ۂ̃C�x���g�∥�A�ł��B������ʂɖ����č\���܂���B
+CASE "���K��"
+	;���Ȃǂ́A���U���đ����ꂽ�ꍇ�ł��B�ʂɂ����ŕ��򂳂��Ȃ��Ă��ǂ��Ǝv���܂�����a�����o��ꍇ�ɂ͂ǂ���
 	IF ARG == TARGET
-		;下着を返してもらってない
+		;������Ԃ��Ă�����ĂȂ�
 		CALL SET_PANTIES, TARGET
 	ELSE
 
 	ENDIF
-;同棲後の自分の部屋の解説です。これも別に無くて構いません
-CASE "自室描写"
+;������̎����̕����̉���ł��B������ʂɖ����č\���܂���
+CASE "�����`��"
 
 ENDSELECT
 
 ;-------------------------------------------------
-;このキャラが拒否しているコマンドのフラグ立てやその他色々なフラグを開始前に設定できる
-;パートナーは勿論、アドバイザーの時でも読み込む
-;TARGETではなく、ARGとして呼ばれることに注意
+;���̃L���������ۂ��Ă���R�}���h�̃t���O���Ă₻�̑��F�X�ȃt���O���J�n�O�ɐݒ�ł���
+;�p�[�g�i�[�͖ܘ_�A�A�h�o�C�U�[�̎��ł��ǂݍ���
+;TARGET�ł͂Ȃ��AARG�Ƃ��ČĂ΂�邱�Ƃɒ���
 ;-------------------------------------------------
 @SETFLAG_BEFORE_TRAIN_K33, ARG
 
-	;コマンド封印 殆どが趣味が合わないことによる理由であるが
-	;口上を書かない選択肢を消すことによって口上のある選択肢が選びやすくなるメリットもあるからどんどん消
-	;足コキ 場合によって靴で踏まれてSMになるので封印
+	;�R�}���h���� �w�ǂ��������Ȃ����Ƃɂ�闝�R�ł��邪
+	;����������Ȃ��I�������������Ƃɂ���Č���̂���I�������I�т₷���Ȃ郁���b�g�����邩��ǂ�ǂ��
+	;���R�L �ꍇ�ɂ���ČC�œ��܂��SM�ɂȂ�̂ŕ���
 	DITEMTYPE:ARG:12 = 1
 	DITEMTYPE:ARG:95 = 1
 	DITEMTYPE:ARG:100 = 1
-	;ハード系 かわいそうなのは抜けないねこ
+	;�n�[�h�n ���킢�����Ȃ͔̂����Ȃ��˂�
 	DITEMTYPE:ARG:130 = 1
 	DITEMTYPE:ARG:141 = 1
 	DITEMTYPE:ARG:142 = 1
 	DITEMTYPE:ARG:143 = 1
-	;アナル 前立腺責めならともかく
+	;�A�i�� �O���B�ӂ߂Ȃ�Ƃ�����
 	DITEMTYPE:ARG:2 = 1
 	DITEMTYPE:ARG:9 = 1
 	DITEMTYPE:ARG:14 = 1
@@ -208,7 +208,7 @@ ENDSELECT
 	DITEMTYPE:ARG:126 = 1
 	DITEMTYPE:ARG:127 = 1
 	DITEMTYPE:ARG:136 = 1
-	;尿道 陰核脚を刺激するという理論はわかる
+	;�A�� �A�j�r���h������Ƃ������_�͂킩��
 	DITEMTYPE:ARG:15 = 1
 	DITEMTYPE:ARG:83 = 1
 	DITEMTYPE:ARG:84 = 1
@@ -219,124 +219,124 @@ ENDSELECT
 	DITEMTYPE:ARG:149 = 1
 	DITEMTYPE:ARG:151 = 1
 	DITEMTYPE:ARG:152 = 1
-	;ニプルファック
+	;�j�v���t�@�b�N
 	DITEMTYPE:ARG:82 = 1
-	;ピアッシング 嫌いじゃないけどかわいそう 口上書く気になったら開放する
+	;�s�A�b�V���O ��������Ȃ����ǂ��킢���� ���㏑���C�ɂȂ�����J������
 	DITEMTYPE:ARG:148 = 1
-	;具現 現状未成熟で射精するので封印 口上書いてパッチが通ったら開放
+	;� ���󖢐��n�Ŏː�����̂ŕ��� ���㏑���ăp�b�`���ʂ�����J��
 	DITEMTYPE:ARG:200 = 1
 ;-------------------------------------------------
-;一日の終わりでフラグなどを変化させたい時にはここで弄ることが出来る
-;TARGETではなく、ARGとして呼ばれることに注意
+;����̏I���Ńt���O�Ȃǂ�ω������������ɂ͂����ŘM�邱�Ƃ��o����
+;TARGET�ł͂Ȃ��AARG�Ƃ��ČĂ΂�邱�Ƃɒ���
 ;-------------------------------------------------
 @TIMEEVENT_K33, ARG
-;恋慕になったら普段着をすこし過激にする
-IF TALENT:ARG:恋慕
-	CSTR:ARG:普段着 = ルーズブラウス_ノーブラ_ハイソックス_スニーカー：夏
-	CSTR:ARG:普段着２ = ショートコート_スカート_サイハイソックス_ブーツ_ストール：冬
-	CSTR:ARG:普段着３ = ブラウス_ノーブラ_ハイソックス_スニーカー：春秋
-	IF COND("夏")
+;����ɂȂ����畁�i�����������ߌ��ɂ���
+IF TALENT:ARG:����
+	CSTR:ARG:���i�� = ���[�Y�u���E�X_�m�[�u��_�n�C�\�b�N�X_�X�j�[�J�[�F��
+	CSTR:ARG:���i���Q = �V���[�g�R�[�g_�X�J�[�g_�T�C�n�C�\�b�N�X_�u�[�c_�X�g�[���F�~
+	CSTR:ARG:���i���R = �u���E�X_�m�[�u��_�n�C�\�b�N�X_�X�j�[�J�[�F�t�H
+	IF COND("��")
 		CALL SET_BRA, ARG
 	ENDIF
 ENDIF
 
 ;-------------------------------------------------
-;調教開始時のセリフ
+;�����J�n���̃Z���t
 ;-------------------------------------------------
 @EVENTTRAIN
 SIF NO:TARGET != 33
 	RETURN 1
-;処女か恋慕がつく前ならゴムの事は考えない
-SIF TALENT:処女 || TALENT:恋慕 == 0
-	CALL SETFLAG, "Ｖ生挿入許可"
+;���������炪���O�Ȃ�S���̎��͍l���Ȃ�
+SIF TALENT:���� || TALENT:���� == 0
+	CALL SETFLAG, "�u���}������"
 DRAWLINE
 ;-------------------------------------------------
-;初調教時
+;��������
 ;-------------------------------------------------
-IF CEVENT("調教開始：初調教") == 0
-		;見学とは言ったけど部員フェリシエルだけのパターンもあるだろうし結局フェリシエルから教えてもらってることにする
-		PRINTFORMW 「あ……やっぱりするんですね……」
-		PRINTFORMW 「フェリシエルさんがいろいろ教えてくれたんです」
-		PRINTFORMW 「ここに来る人は、何らかの理由で%CNAME("二人称")%とえっちしなくちゃならないって」
-		;そんなことはない
-		PRINTFORMW 「そして%CNAME("一人称")%の身体はえっちなことしないといけない病気だって」
-		PRINTFORMW 「それも、普通の人間とは違うから抑えが効かなくなってるって」
+IF CEVENT("�����J�n�F������") == 0
+		;���w�Ƃ͌��������Ǖ����t�F���V�G�������̃p�^�[�������邾�낤�����ǃt�F���V�G�����狳���Ă�����Ă邱�Ƃɂ���
+		PRINTFORMW �u���c�c����ς肷���ł��ˁc�c�v
+		PRINTFORMW �u�t�F���V�G�����񂪂��낢�닳���Ă��ꂽ��ł��v
+		PRINTFORMW �u�����ɗ���l�́A���炩�̗��R��%CNAME("��l��")%�Ƃ��������Ȃ�����Ȃ�Ȃ����āv
+		;����Ȃ��Ƃ͂Ȃ�
+		PRINTFORMW �u������%CNAME("��l��")%�̐g�̂͂������Ȃ��Ƃ��Ȃ��Ƃ����Ȃ��a�C�����āv
+		PRINTFORMW �u������A���ʂ̐l�ԂƂ͈Ⴄ����}���������Ȃ��Ȃ��Ă���āv
 		PRINTFORML
-		PRINTFORMW 「%CNAME("一人称")%にとっては嘘っぽい話ですけど……」
-		PRINTFORMW 「正直、心当たりもいくつかあって……」
-		PRINTFORMW 「それに%CNAME("二人称")%となら、えっちなことをしてもいいかなって」
-		PRINTFORMW 「きっとこのままだと、%CNAME("一人称")%が%CNAME("一人称")%じゃなくなっちゃうだろうから……」
+		PRINTFORMW �u%CNAME("��l��")%�ɂƂ��Ă͉R���ۂ��b�ł����ǁc�c�v
+		PRINTFORMW �u�����A�S������������������āc�c�v
+		PRINTFORMW �u�����%CNAME("��l��")%�ƂȂ�A�������Ȃ��Ƃ����Ă��������Ȃ��āv
+		PRINTFORMW �u�����Ƃ��̂܂܂��ƁA%CNAME("��l��")%��%CNAME("��l��")%����Ȃ��Ȃ����Ⴄ���낤����c�c�v
 		PRINTFORML
-		PRINTFORMW 「だから%CNAME("二人称")%、お願いします」
-		PRINTFORMW 「%CNAME("一人称")%にえっちなことを、教えてください……」
+		PRINTFORMW �u������%CNAME("��l��")%�A���肢���܂��v
+		PRINTFORMW �u%CNAME("��l��")%�ɂ������Ȃ��Ƃ��A�����Ă��������c�c�v
 		PRINTFORML 
-		PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の頭をやさしく撫でてあげると、震えている身体をそっと抱き寄せた……
-	CALL SET_CEVENT, "調教開始：初調教"
+		PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̓����₳�������łĂ�����ƁA�k���Ă���g�̂������ƕ����񂹂��c�c
+	CALL SET_CEVENT, "�����J�n�F������"
 ;-------------------------------------------------
-;調教開始時（一回のみ）
+;�����J�n���i���̂݁j
 ;-------------------------------------------------
-;初めてのご褒美Ｈ
-;初等部にご褒美もらうってうーん
-;むしろご褒美に精をあげる立場では
-ELSEIF EQUIP:Ｈなご褒美 && CEVENT("調教開始：ご褒美Ｈ") == 0
+;���߂Ă̂��J���g
+;�������ɂ��J�����炤���Ă��[��
+;�ނ��낲�J���ɐ��������闧��ł�
+ELSEIF EQUIP:�g�Ȃ��J�� && CEVENT("�����J�n�F���J���g") == 0
 	PRINTFORMW 
-	CALL SET_CEVENT, "調教開始：ご褒美Ｈ"
-;屈服刻印Lv1
-ELSEIF MARK:屈服刻印 == 1 && TALENT:恋慕 == 0 && CEVENT("調教開始：屈服刻印ＬＶ１") == 0
+	CALL SET_CEVENT, "�����J�n�F���J���g"
+;��������Lv1
+ELSEIF MARK:�������� == 1 && TALENT:���� == 0 && CEVENT("�����J�n�F��������k�u�P") == 0
 	PRINTFORMW 
-	CALL SET_CEVENT, "調教開始：屈服刻印ＬＶ１"
-;屈服刻印Lv2
-ELSEIF MARK:屈服刻印 == 2 && TALENT:恋慕 == 0 && CEVENT("調教開始：屈服刻印ＬＶ２") == 0
+	CALL SET_CEVENT, "�����J�n�F��������k�u�P"
+;��������Lv2
+ELSEIF MARK:�������� == 2 && TALENT:���� == 0 && CEVENT("�����J�n�F��������k�u�Q") == 0
 	PRINTFORMW 
-	CALL SET_CEVENT, "調教開始：屈服刻印ＬＶ２"
-;屈服刻印Lv3
-ELSEIF MARK:屈服刻印 == 3 && TALENT:恋慕 == 0 && CEVENT("調教開始：屈服刻印ＬＶ３") == 0
+	CALL SET_CEVENT, "�����J�n�F��������k�u�Q"
+;��������Lv3
+ELSEIF MARK:�������� == 3 && TALENT:���� == 0 && CEVENT("�����J�n�F��������k�u�R") == 0
 	PRINTFORMW 
-	CALL SET_CEVENT, "調教開始：屈服刻印ＬＶ３"
-;恋慕
-ELSEIF TALENT:恋慕 && CEVENT("調教開始：恋慕") == 0
-	;淫乱を先に獲得したかで分岐させたい場合(別にこの分岐は無くても良いと思います)
-	IF CEVENT("先に淫乱獲得")
+	CALL SET_CEVENT, "�����J�n�F��������k�u�R"
+;����
+ELSEIF TALENT:���� && CEVENT("�����J�n�F����") == 0
+	;�������Ɋl���������ŕ��򂳂������ꍇ(�ʂɂ��̕���͖����Ă��ǂ��Ǝv���܂�)
+	IF CEVENT("��Ɉ����l��")
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
-	CALL SET_CEVENT, "調教開始：恋慕"
-;相思相愛
-ELSEIF TALENT:相思相愛 && CEVENT("調教開始：相思相愛") == 0
+	CALL SET_CEVENT, "�����J�n�F����"
+;���v����
+ELSEIF TALENT:���v���� && CEVENT("�����J�n�F���v����") == 0
 	PRINTFORMW 
-	CALL SET_CEVENT, "調教開始：相思相愛"
-;助手の有無をチェック（いない場合は二回目以降へ飛ぶ）
+	CALL SET_CEVENT, "�����J�n�F���v����"
+;����̗L�����`�F�b�N�i���Ȃ��ꍇ�͓��ڈȍ~�֔�ԁj
 ELSEIF ASSI <= 0
 	CALL K33_KOJO2
 
 ;-------------------------------------------------
-;助手との掛け合い(YYを助手のキャラ番号に置換、ＸＸを助手のキャラ番号に対応した名前に変更する) 
-;掛け合いをするキャラを増やす場合は、コピー＆ペーストをして増やす
+;����Ƃ̊|������(YY������̃L�����ԍ��ɒu���A�w�w������̃L�����ԍ��ɑΉ��������O�ɕύX����) 
+;�|������������L�����𑝂₷�ꍇ�́A�R�s�[���y�[�X�g�����đ��₷
 ;-------------------------------------------------
-;助手
+;����
 ;ELSEIF NO:ASSI == YY
-	;初めて
-;	IF CEVENT("助手会話：ＸＸ") == 0
-		;恋慕＋恋慕時初口上（陥落イベント）が発生済み
-;		IF CEVENT("調教開始：恋慕")
+	;���߂�
+;	IF CEVENT("�����b�F�w�w") == 0
+		;����{���玞������i�ח��C�x���g�j�������ς�
+;		IF CEVENT("�����J�n�F����")
 ;			PRINTFORMW 
-		;それ以外
+		;����ȊO
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
-;		CALL SET_CEVENT, "助手会話：ＸＸ"
-	;二回目以降
+;		CALL SET_CEVENT, "�����b�F�w�w"
+	;���ڈȍ~
 ;	ELSE
-		;恋慕
-;		IF TALENT:恋慕
+		;����
+;		IF TALENT:����
 ;			PRINTFORMW 
-		;それ以外
+		;����ȊO
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
 ;	ENDIF
-;口上のある助手が居ない場合は、通常の二回目以降の口上へ飛ぶ
+;����̂��鏕�肪���Ȃ��ꍇ�́A�ʏ�̓��ڈȍ~�̌���֔��
 ELSE
 	CALL K33_KOJO2
 ENDIF
@@ -345,29 +345,29 @@ RETURN 1
 
 
 ;-------------------------------------------------
-;調教開始時（2回目以降）
+;�����J�n���i2��ڈȍ~�j
 ;-------------------------------------------------
 @K33_KOJO2
-;恋慕
-IF TALENT:恋慕
+;����
+IF TALENT:����
 	PRINTFORMW 
-;屈服刻印Lv0
-ELSEIF MARK:屈服刻印 == 0
+;��������Lv0
+ELSEIF MARK:�������� == 0
 	PRINTFORMW 
-;屈服刻印Lv1
-ELSEIF MARK:屈服刻印 == 1
+;��������Lv1
+ELSEIF MARK:�������� == 1
 	PRINTFORMW 
-;屈服刻印Lv2
-ELSEIF MARK:屈服刻印 == 2
+;��������Lv2
+ELSEIF MARK:�������� == 2
 	PRINTFORMW 
-;屈服刻印Lv3
-ELSEIF MARK:屈服刻印 == 3
+;��������Lv3
+ELSEIF MARK:�������� == 3
 	PRINTFORMW 
 ENDIF
 RETURN 1
 
 ;-------------------------------------------------
-;調教終了時のセリフ
+;�����I�����̃Z���t
 ;-------------------------------------------------
 @EVENTEND
 SIF NO:TARGET != 33
@@ -375,88 +375,88 @@ SIF NO:TARGET != 33
 
 DRAWLINE
 ;-------------------------------------------------
-;※精力限界値を超えた場合の終了口上
+;�����͌��E�l�𒴂����ꍇ�̏I������
 ;-------------------------------------------------
-;調教強制終了時の口上
-IF STATE("撃沈", MASTER)
-	;恋慕
-	IF TALENT:恋慕
+;���������I�����̌���
+IF STATE("����", MASTER)
+	;����
+	IF TALENT:����
 		PRINTFORMW 
-	;その他
+	;���̑�
 	ELSE
 		PRINTFORMW 
 	ENDIF
-;パートナーが体力or精力尽きた場合
-ELSEIF STATE("撃沈")
+;�p�[�g�i�[���̗�or���͐s�����ꍇ
+ELSEIF STATE("����")
 	PRINTFORMW 
-;恋慕＋満足
-ELSEIF TALENT:恋慕 && COND("満足")
+;����{����
+ELSEIF TALENT:���� && COND("����")
 	PRINTFORMW 
-;恋慕
-ELSEIF TALENT:恋慕
+;����
+ELSEIF TALENT:����
 	PRINTFORMW 
-;屈服刻印Lv1以下
-ELSEIF MARK:屈服刻印 <= 1
+;��������Lv1�ȉ�
+ELSEIF MARK:�������� <= 1
 	PRINTFORMW 
-;屈服刻印Lv2
-ELSEIF MARK:屈服刻印 == 2
+;��������Lv2
+ELSEIF MARK:�������� == 2
 	PRINTFORMW 
-;屈服刻印Lv3
-ELSEIF MARK:屈服刻印 == 3
+;��������Lv3
+ELSEIF MARK:�������� == 3
 	PRINTFORMW 
 ENDIF
 RETURN 1
 
 ;-------------------------------------------------
-;コマンド実行時のセリフ
+;�R�}���h���s���̃Z���t
 ;-------------------------------------------------
 @KOJO_MESSAGE_COM_K33
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;���肪�����������Ɍ�����X�L�b�v����i�D�݂ɉ����Ďg���A�s����;�������ƃX�L�b�v����悤�ɂȂ�j
 ;SIF ASSIPLAY
 ;	RETURN 0
 ;-------------------------------------------------
-;愛撫
+;����
 ;-------------------------------------------------
-;BEFOREゆき
+;BEFORE�䂫
 ;-------------------------------------------------
-;クンニ　顔面騎乗(押し倒されているとき)
+;�N���j�@��ʋR��(�����|����Ă���Ƃ�)
 ;-------------------------------------------------
 IF SELECTCOM == 1
-	;押し倒されているとき
-	IF TEQUIP:押し倒し
-		;初めて
+	;�����|����Ă���Ƃ�
+	IF TEQUIP:�����|��
+		;���߂�
 		IF FIRSTCOM_REV(SELECTCOM) == 0
 			;PRINTFORMW 
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;恋慕
-			IF TALENT:恋慕
+			;����
+			IF TALENT:����
 				;PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				;PRINTFORMW 
 			ENDIF
 		ENDIF
 	ELSE
-		;初めて
+		;���߂�
 		IF FIRSTCOM(SELECTCOM) == 0
 			;PRINTFORMW 
-		;二回目以降
-		;お掃除クンニ
-		ELSEIF COND("お掃除クンニフラグ", PLAYER)
-			;恋慕
-			IF TALENT:恋慕
+		;���ڈȍ~
+		;���|���N���j
+		ELSEIF COND("���|���N���j�t���O", PLAYER)
+			;����
+			IF TALENT:����
 				;PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				;PRINTFORMW 
 			ENDIF
-		;それ以外
+		;����ȊO
 		ELSE
-			;恋慕
-			IF TALENT:恋慕
+			;����
+			IF TALENT:����
 				;PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				;PRINTFORMW 
 			ENDIF
@@ -466,26 +466,26 @@ IF SELECTCOM == 1
 ENDIF
 
 ;-------------------------------------------------
-;アナル愛撫
+;�A�i������
 ;-------------------------------------------------
 IF SELECTCOM == 2
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;気持ちいい
-		IF CHECK("Ａ指挿入れ")
+		;�C��������
+		IF CHECK("�`�w�}����")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
-			;Ａバイブ使用中
-			IF TEQUIP:アナルバイブ
-				;Ｓ状結腸までバイブが侵入している
-				IF CHECK_COM("結腸責め")
+		;����
+		IF TALENT:����
+			;�`�o�C�u�g�p��
+			IF TEQUIP:�A�i���o�C�u
+				;�r�󌋒��܂Ńo�C�u���N�����Ă���
+				IF CHECK_COM("�����ӂ�")
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
@@ -493,13 +493,13 @@ IF SELECTCOM == 2
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;気持ちいい
-		ELSEIF CHECK("Ａ指挿入れ")
-			;Ａバイブ使用中
-			IF TEQUIP:アナルバイブ
-				;Ｓ状結腸までバイブが侵入している
-				IF CHECK_COM("結腸責め")
-					IF TALENT:結腸性感
+		;�C��������
+		ELSEIF CHECK("�`�w�}����")
+			;�`�o�C�u�g�p��
+			IF TEQUIP:�A�i���o�C�u
+				;�r�󌋒��܂Ńo�C�u���N�����Ă���
+				IF CHECK_COM("�����ӂ�")
+					IF TALENT:��������
 						PRINTFORMW 
 					ELSE
 						PRINTFORMW 
@@ -510,7 +510,7 @@ IF SELECTCOM == 2
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -519,18 +519,18 @@ IF SELECTCOM == 2
 ENDIF
 
 ;-------------------------------------------------
-;自慰
+;����
 ;-------------------------------------------------
 IF SELECTCOM == 3
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		;PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
@@ -539,34 +539,34 @@ IF SELECTCOM == 3
 ENDIF
 
 ;-------------------------------------------------
-;フェラする(ふたなり/オトコのみ)
+;�t�F������(�ӂ��Ȃ�/�I�g�R�̂�)
 ;-------------------------------------------------
 IF SELECTCOM == 4
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -575,33 +575,33 @@ IF SELECTCOM == 4
 ENDIF
 
 ;-------------------------------------------------
-;胸愛撫
+;������
 ;-------------------------------------------------
-;BEFOREゆき
+;BEFORE�䂫
 ;-------------------------------------------------
-;キス
+;�L�X
 ;-------------------------------------------------
-;BEFOREゆき
+;BEFORE�䂫
 ;-------------------------------------------------
-;アソコ愛撫
-;クリトリスの場合にはCHECK_COM("陰核愛撫"), アソコの場合にはCHECK_COM("アソコ愛撫"), 恥丘ならCHECK_COM("恥丘愛撫")がONになる
+;�A�\�R����
+;�N���g���X�̏ꍇ�ɂ�CHECK_COM("�A�j����"), �A�\�R�̏ꍇ�ɂ�CHECK_COM("�A�\�R����"), �p�u�Ȃ�CHECK_COM("�p�u����")��ON�ɂȂ�
 ;-------------------------------------------------
 IF SELECTCOM == 7
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		;PRINTFORMW 
-	;二回目以降
-	;中出し後にお掃除
-	ELSEIF CHECK_COM("ふきふき")
-		;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;���ڈȍ~
+	;���o����ɂ��|��
+	ELSEIF CHECK_COM("�ӂ��ӂ�")
+		;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 		RETURN 0
 		;PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
@@ -610,50 +610,50 @@ IF SELECTCOM == 7
 ENDIF
 
 ;-------------------------------------------------
-;指挿入れ
-;CHECK_COM("Ｇスポ責め")とTEQUIP:バイブで大きく分岐する
+;�w�}����
+;CHECK_COM("�f�X�|�ӂ�")��TEQUIP:�o�C�u�ő傫�����򂷂�
 ;-------------------------------------------------
 IF SELECTCOM == 8
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;バイブ挿入中
-		IF TEQUIP:バイブ
+		;�o�C�u�}����
+		IF TEQUIP:�o�C�u
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;Gスポット刺激
-	ELSEIF CHECK_COM("Ｇスポ責め")
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;G�X�|�b�g�h��
+	ELSEIF CHECK_COM("�f�X�|�ӂ�")
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;気持ちいい
-		ELSEIF CHECK("指挿入れ")
+		;�C��������
+		ELSEIF CHECK("�w�}����")
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
-	;バイブ挿入中
-	ELSEIF TEQUIP:バイブ
-		;恋慕
-		IF TALENT:恋慕
+	;�o�C�u�}����
+	ELSEIF TEQUIP:�o�C�u
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;気持ちいい
-		ELSEIF CHECK("バイブ")
+		;�C��������
+		ELSEIF CHECK("�o�C�u")
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
@@ -662,35 +662,35 @@ IF SELECTCOM == 8
 ENDIF
 
 ;-------------------------------------------------
-;アナル舐め　Ａ顔面騎乗(押し倒されているとき)
+;�A�i���r�߁@�`��ʋR��(�����|����Ă���Ƃ�)
 ;-------------------------------------------------
-;アナル舐め
+;�A�i���r��
 IF SELECTCOM == 9
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -698,18 +698,18 @@ IF SELECTCOM == 9
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;手コキする
+;��R�L����
 ;-------------------------------------------------
 IF SELECTCOM == 10
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -717,18 +717,18 @@ IF SELECTCOM == 10
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;パイズリする
+;�p�C�Y������
 ;-------------------------------------------------
 IF SELECTCOM == 11
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -736,18 +736,18 @@ IF SELECTCOM == 11
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;足コキする
+;���R�L����
 ;-------------------------------------------------
 IF SELECTCOM == 12
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -755,18 +755,18 @@ IF SELECTCOM == 12
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;くぱぁさせる
+;���ς�������
 ;-------------------------------------------------
 IF SELECTCOM == 13
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -774,18 +774,18 @@ IF SELECTCOM == 13
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;Ａくぱぁさせる
+;�`���ς�������
 ;-------------------------------------------------
 IF SELECTCOM == 14
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -793,24 +793,24 @@ IF SELECTCOM == 14
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;尿道指挿入れ
+;�A���w�}����
 ;-------------------------------------------------
 IF SELECTCOM == 15
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;痛くない
-		IF CHECK("尿道プレイ")
+		;�ɂ��Ȃ�
+		IF CHECK("�A���v���C")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;痛くない
-		IF CHECK("尿道プレイ")
+		;�ɂ��Ȃ�
+		IF CHECK("�A���v���C")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -818,18 +818,18 @@ IF SELECTCOM == 15
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ローター
+;���[�^�[
 ;-------------------------------------------------
 IF SELECTCOM == 30
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -838,34 +838,34 @@ IF SELECTCOM == 30
 ENDIF
 
 ;-------------------------------------------------
-;バイブ
+;�o�C�u
 ;-------------------------------------------------
-;開始時
+;�J�n��
 IF SELECTCOM == 31
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;余裕あり
-		IF CHECK("バイブ")
+		;�]�T����
+		IF CHECK("�o�C�u")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;脱着時(使用していたバイブの大きさはCHECK("Ｖ最新受け入れサイズ")で判定)
-	ELSEIF TEQUIP:バイブ == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�E����(�g�p���Ă����o�C�u�̑傫����CHECK("�u�ŐV�󂯓���T�C�Y")�Ŕ���)
+	ELSEIF TEQUIP:�o�C�u == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;余裕あり
-		IF CHECK("バイブ")
+		;�]�T����
+		IF CHECK("�o�C�u")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -873,35 +873,35 @@ IF SELECTCOM == 31
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;アナルバイブ
+;�A�i���o�C�u
 ;-------------------------------------------------
-;開始時
+;�J�n��
 IF SELECTCOM == 33
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;余裕あり
-		IF CHECK("Ａバイブ")
+		;�]�T����
+		IF CHECK("�`�o�C�u")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;脱着時(使用していたバイブの大きさはCHECK("Ａ最新受け入れサイズ")で判定)
-	ELSEIF TEQUIP:アナルバイブ == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�E����(�g�p���Ă����o�C�u�̑傫����CHECK("�`�ŐV�󂯓���T�C�Y")�Ŕ���)
+	ELSEIF TEQUIP:�A�i���o�C�u == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;余裕あり
-		IF CHECK("Ａバイブ")
-			;Ｓ状結腸までバイブが侵入している
-			IF CHECK_COM("結腸責め")
-				IF TALENT:結腸性感
+		;�]�T����
+		IF CHECK("�`�o�C�u")
+			;�r�󌋒��܂Ńo�C�u���N�����Ă���
+			IF CHECK_COM("�����ӂ�")
+				IF TALENT:��������
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
@@ -909,7 +909,7 @@ IF SELECTCOM == 33
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -917,34 +917,34 @@ IF SELECTCOM == 33
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;オナホール
+;�I�i�z�[��
 ;-------------------------------------------------
 IF SELECTCOM == 37
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -952,87 +952,87 @@ IF SELECTCOM == 37
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;Ｖ挿入系初選択
+;�u�}���n���I��
 
 ;-------------------------------------------------
-IF SELECTCOM >= 60 && SELECTCOM <= 69 && FIRSTCOMS("Ｖ挿入") == 0
-	;初挿入したことによりV名器が発覚
-	SIF TALENT:Ｖ名器 < 3
-		TALENT:Ｖ名器 = 3
-	SIF ABL:Ｖ感覚 < 3
-		ABL:Ｖ感覚 = 3
-	;PRINTFORMW ＜%CALLNAME:TARGET%は[Ｖ名器Ⅲ]を得た＞
-	;処女
-	IF TALENT:処女
-		;恋慕
-		IF TALENT:恋慕
+IF SELECTCOM >= 60 && SELECTCOM <= 69 && FIRSTCOMS("�u�}��") == 0
+	;���}���������Ƃɂ��V���킪���o
+	SIF TALENT:�u���� < 3
+		TALENT:�u���� = 3
+	SIF ABL:�u���o < 3
+		ABL:�u���o = 3
+	;PRINTFORMW ��%CALLNAME:TARGET%��[�u����V]�𓾂���
+	;����
+	IF TALENT:����
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;非処女
+	;�񏈏�
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 	RETURN 1
 ;-------------------------------------------------
-;調教ごとの初Ｖインサート
+;�������Ƃ̏��u�C���T�[�g
 ;-------------------------------------------------
-ELSEIF SELECTCOM >= 60 && SELECTCOM <= 69 && CHOSECOMS("Ｖ挿入") == 0 && FIRSTCOM(SELECTCOM) && RAND:3 == 0
-	;巨根
-	IF SIZE("ペニス", PLAYER) >= 2 && RANDIF(1, TALENT:恋慕)
+ELSEIF SELECTCOM >= 60 && SELECTCOM <= 69 && CHOSECOMS("�u�}��") == 0 && FIRSTCOM(SELECTCOM) && RAND:3 == 0
+	;����
+	IF SIZE("�y�j�X", PLAYER) >= 2 && RANDIF(1, TALENT:����)
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		SELECTCASE SELECTCOM
-		;騎乗位
+		;�R���
 		CASE 65
 			PRINTFORMW 
-		;対面座位
+		;�Ζʍ���
 		CASE 63
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		CASEELSE
 			PRINTFORMW 
 		ENDSELECT
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
 ;-------------------------------------------------
-;全Ｖインサート共通のランダム文
-;ここに力を入れると毎回異なる反応をするようになるのでおすすめ
+;�S�u�C���T�[�g���ʂ̃����_����
+;�����ɗ͂�����Ɩ���قȂ锽��������悤�ɂȂ�̂ł�������
 ;-------------------------------------------------
 ELSEIF SELECTCOM >= 60 && SELECTCOM <= 69 && CHOSECOM(SELECTCOM) && RAND:3 == 0
-	;イきそうなのに焦らされている
-	IF TEQUIP:PLAYER:手加減 && NOWEX:Ｖ寸止め && RAND:2
-		IF TALENT:恋慕
+	;�C�������Ȃ̂ɏł炳��Ă���
+	IF TEQUIP:PLAYER:����� && NOWEX:�u���~�� && RAND:2
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;好きな体位
-	ELSEIF COND("好きな体位中") && SELECTCOM == INSERT("Ｖ対応コマンド") && RAND:2
-		IF TALENT:恋慕
+	;�D���ȑ̈�
+	ELSEIF COND("�D���ȑ̈ʒ�") && SELECTCOM == INSERT("�u�Ή��R�}���h") && RAND:2
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		SELECTCASE CONDS("体位")
-		CASE "正常位", "屈曲位"
-			IF TALENT:恋慕 && RAND:3 == 0
+		SELECTCASE CONDS("�̈�")
+		CASE "�����", "���Ȉ�"
+			IF TALENT:���� && RAND:3 == 0
 				PRINTFORMW 
-			ELSEIF MARK:屈服刻印 >= 2 && RAND:2
+			ELSEIF MARK:�������� >= 2 && RAND:2
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW 
@@ -1051,41 +1051,41 @@ ELSEIF SELECTCOM >= 60 && SELECTCOM <= 69 && CHOSECOM(SELECTCOM) && RAND:3 == 0
 	ENDIF
 	RETURN 1
 ;-------------------------------------------------
-;二穴挿入(書く場合には;を消してください)
+;�񌊑}��(�����ꍇ�ɂ�;�������Ă�������)
 ;-------------------------------------------------
-;ELSEIF SELECTCOM >= 60 && SELECTCOM <= 79 && COND("３Ｐ")
-;	IF CHECK_COM("Ｖ二本挿入")
-;		;恋慕
-;		IF TALENT:恋慕
+;ELSEIF SELECTCOM >= 60 && SELECTCOM <= 79 && COND("�R�o")
+;	IF CHECK_COM("�u��{�}��")
+;		;����
+;		IF TALENT:����
 ;			PRINTFORMW 
-;		;余裕あり
-;		ELSEIF CHECK("Ｖ二本挿入")
+;		;�]�T����
+;		ELSEIF CHECK("�u��{�}��")
 ;			PRINTFORMW 
-;		;それ以外
+;		;����ȊO
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
 ;		RETURN 1
-;	ELSEIF CHECK_COM("Ａ二本挿入")
-;		;恋慕
-;		IF TALENT:恋慕
+;	ELSEIF CHECK_COM("�`��{�}��")
+;		;����
+;		IF TALENT:����
 ;			PRINTFORMW 
-;		;余裕あり
-;		ELSEIF CHECK("Ａ二本挿入")
+;		;�]�T����
+;		ELSEIF CHECK("�`��{�}��")
 ;			PRINTFORMW 
-;		;それ以外
+;		;����ȊO
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
 ;		RETURN 1
-;	ELSEIF CHECK_COM("二穴挿入")
-;		;恋慕
-;		IF TALENT:恋慕
+;	ELSEIF CHECK_COM("�񌊑}��")
+;		;����
+;		IF TALENT:����
 ;			PRINTFORMW 
-;		;余裕あり
-;		ELSEIF CHECK("二穴挿入")
+;		;�]�T����
+;		ELSEIF CHECK("�񌊑}��")
 ;			PRINTFORMW 
-;		;それ以外
+;		;����ȊO
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
@@ -1094,27 +1094,27 @@ ELSEIF SELECTCOM >= 60 && SELECTCOM <= 69 && CHOSECOM(SELECTCOM) && RAND:3 == 0
 ENDIF
 
 ;-------------------------------------------------
-;正常位
+;�����
 ;-------------------------------------------------
 IF SELECTCOM == 60
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;屈服刻印Lv2以上
-		ELSEIF MARK:屈服刻印 >= 2
+		;��������Lv2�ȏ�
+		ELSEIF MARK:�������� >= 2
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1123,27 +1123,27 @@ IF SELECTCOM == 60
 ENDIF
 
 ;-------------------------------------------------
-;後背位
+;��w��
 ;-------------------------------------------------
 IF SELECTCOM == 61
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;屈服刻印Lv2以上
-		ELSEIF MARK:屈服刻印 >= 2
+		;��������Lv2�ȏ�
+		ELSEIF MARK:�������� >= 2
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1152,27 +1152,27 @@ IF SELECTCOM == 61
 ENDIF
 
 ;-------------------------------------------------
-;屈曲位
+;���Ȉ�
 ;-------------------------------------------------
 IF SELECTCOM == 62
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;屈服刻印Lv2以上
-		ELSEIF MARK:屈服刻印 >= 2
+		;��������Lv2�ȏ�
+		ELSEIF MARK:�������� >= 2
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1181,27 +1181,27 @@ IF SELECTCOM == 62
 ENDIF
 
 ;-------------------------------------------------
-;対面座位
+;�Ζʍ���
 ;-------------------------------------------------
 IF SELECTCOM == 63
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;屈服刻印Lv2以上
-		ELSEIF MARK:屈服刻印 >= 2
+		;��������Lv2�ȏ�
+		ELSEIF MARK:�������� >= 2
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1210,28 +1210,28 @@ IF SELECTCOM == 63
 ENDIF
 
 ;-------------------------------------------------
-;背面座位
+;�w�ʍ���
 ;-------------------------------------------------
-;背面座位
+;�w�ʍ���
 IF SELECTCOM == 64
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;屈服刻印Lv2以上
-		ELSEIF MARK:屈服刻印 >= 2
+		;��������Lv2�ȏ�
+		ELSEIF MARK:�������� >= 2
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1239,34 +1239,34 @@ IF SELECTCOM == 64
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;騎乗位
+;�R���
 ;-------------------------------------------------
 IF SELECTCOM == 65
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1274,34 +1274,34 @@ IF SELECTCOM == 65
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;挿入Ｇスポ責め
+;�}���f�X�|�ӂ�
 ;-------------------------------------------------
 IF SELECTCOM == 66
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1310,37 +1310,37 @@ IF SELECTCOM == 66
 ENDIF
 
 ;-------------------------------------------------
-;挿入子宮口責め
+;�}���q�{���ӂ�
 ;-------------------------------------------------
 IF SELECTCOM == 67
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-		;初子宮責めしたことにより子宮性感が発覚
-		;TALENT:子宮性感 = 1
-		;PRINTFORMW ＜%CALLNAME:TARGET%は[子宮性感]を得た＞
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+		;���q�{�ӂ߂������Ƃɂ��q�{���������o
+		;TALENT:�q�{���� = 1
+		;PRINTFORMW ��%CALLNAME:TARGET%��[�q�{����]�𓾂���
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1349,34 +1349,34 @@ IF SELECTCOM == 67
 ENDIF
 
 ;-------------------------------------------------
-;子宮挿入
+;�q�{�}��
 ;-------------------------------------------------
 IF SELECTCOM == 68
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1385,114 +1385,114 @@ IF SELECTCOM == 68
 ENDIF
 
 ;-------------------------------------------------
-;Ａ挿入系初選択
-;痛みが少なく楽しめているかはCHECK("Ａインサート")で判定
+;�`�}���n���I��
+;�ɂ݂����Ȃ��y���߂Ă��邩��CHECK("�`�C���T�[�g")�Ŕ���
 ;-------------------------------------------------
-IF SELECTCOM >= 70 && SELECTCOM <= 79 && FIRSTCOMS("Ａ挿入") == 0
-	;Ａ処女
-	IF TALENT:Ａ処女
-		;恋慕
-		IF TALENT:恋慕
+IF SELECTCOM >= 70 && SELECTCOM <= 79 && FIRSTCOMS("�`�}��") == 0
+	;�`����
+	IF TALENT:�`����
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;余裕あり
-		ELSEIF CHECK("Ａインサート")
+		;�]�T����
+		ELSEIF CHECK("�`�C���T�[�g")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;余裕あり
-		ELSEIF CHECK("Ａインサート")
+		;�]�T����
+		ELSEIF CHECK("�`�C���T�[�g")
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 	RETURN 1
 ;-------------------------------------------------
-;調教ごとの初Ａインサート
+;�������Ƃ̏��`�C���T�[�g
 ;-------------------------------------------------
-ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHOSECOMS("Ａ挿入") == 0 && FIRSTCOM(SELECTCOM) && RAND:3 == 0
-	;余裕が無い
-	IF CHECK("Ａインサート") == 0
+ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHOSECOMS("�`�}��") == 0 && FIRSTCOM(SELECTCOM) && RAND:3 == 0
+	;�]�T������
+	IF CHECK("�`�C���T�[�g") == 0
 		PRINTFORMW 
-	;巨根
-	ELSEIF SIZE("ペニス", PLAYER) >= 2 && RANDIF(1, TALENT:恋慕)
+	;����
+	ELSEIF SIZE("�y�j�X", PLAYER) >= 2 && RANDIF(1, TALENT:����)
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		SELECTCASE SELECTCOM
-		;騎乗位
+		;�R���
 		CASE 75
 			PRINTFORMW 
-		;対面座位
+		;�Ζʍ���
 		CASE 73
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		CASEELSE
 			PRINTFORMW 
 		ENDSELECT
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
 ;-------------------------------------------------
-;Ｓ状結腸を使ってのアナルセックス
+;�r�󌋒����g���ẴA�i���Z�b�N�X
 ;-------------------------------------------------
-ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHECK_COM("結腸責め")
-	;初めての結腸責め
-	IF EXP:結腸経験 == 0
+ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHECK_COM("�����ӂ�")
+	;���߂Ă̌����ӂ�
+	IF EXP:�����o�� == 0
 		PRINTFORMW 
-	;今回初の結腸責め
-	ELSEIF EXP_GAIN("結腸経験")
-		IF TALENT:結腸性感
+	;���񏉂̌����ӂ�
+	ELSEIF EXP_GAIN("�����o��")
+		IF TALENT:��������
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ELSE
-		IF TALENT:結腸性感
+		IF TALENT:��������
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;全Ａインサート共通のランダム文
-;ここに力を入れると毎回異なる反応をするようになるのでおすすめ
+;�S�`�C���T�[�g���ʂ̃����_����
+;�����ɗ͂�����Ɩ���قȂ锽��������悤�ɂȂ�̂ł�������
 ;-------------------------------------------------
 ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHOSECOM(SELECTCOM) && RAND:3 == 0
-	;イきそうなのに焦らされている
-	IF TEQUIP:PLAYER:手加減 && NOWEX:Ａ寸止め && RAND:2
-		IF TALENT:恋慕
+	;�C�������Ȃ̂ɏł炳��Ă���
+	IF TEQUIP:PLAYER:����� && NOWEX:�`���~�� && RAND:2
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;余裕が無い
-	ELSEIF CHECK("Ａインサート") == 0
+	;�]�T������
+	ELSEIF CHECK("�`�C���T�[�g") == 0
 		PRINTFORMW 
-	;好きな体位
-	ELSEIF COND("好きな体位中") && SELECTCOM == INSERT("Ａ対応コマンド") && RAND:2
-		IF TALENT:恋慕
+	;�D���ȑ̈�
+	ELSEIF COND("�D���ȑ̈ʒ�") && SELECTCOM == INSERT("�`�Ή��R�}���h") && RAND:2
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		SELECTCASE CONDS("体位")
-		CASE "正常位", "屈曲位"
-			IF TALENT:恋慕 && RAND:3 == 0
+		SELECTCASE CONDS("�̈�")
+		CASE "�����", "���Ȉ�"
+			IF TALENT:���� && RAND:3 == 0
 				PRINTFORMW 
-			ELSEIF MARK:屈服刻印 >= 2 && RAND:2
+			ELSEIF MARK:�������� >= 2 && RAND:2
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW 
@@ -1512,52 +1512,52 @@ ELSEIF SELECTCOM >= 70 && SELECTCOM <= 79 && CHOSECOM(SELECTCOM) && RAND:3 == 0
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;アナルセックス(初めては上のＡ挿入系初選択などで)
+;�A�i���Z�b�N�X(���߂Ă͏�̂`�}���n���I���Ȃǂ�)
 ;-------------------------------------------------
 IF SELECTCOM >= 70 && SELECTCOM <= 74
-	;余裕が無い
-	IF CHECK("Ａインサート") == 0
+	;�]�T������
+	IF CHECK("�`�C���T�[�g") == 0
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;アナル騎乗位
+;�A�i���R���
 ;-------------------------------------------------
 IF SELECTCOM == 75
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1565,34 +1565,34 @@ IF SELECTCOM == 75
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;貝あわせ
+;�L���킹
 ;-------------------------------------------------
 IF SELECTCOM == 80
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1601,27 +1601,27 @@ IF SELECTCOM == 80
 ENDIF
 
 ;-------------------------------------------------
-;胸の谷間を犯す
+;���̒J�Ԃ�Ƃ�
 ;-------------------------------------------------
 IF SELECTCOM == 81
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;奉仕精神Lv3以上
-		ELSEIF ABL:奉仕精神 >= 3
+		;��d���_Lv3�ȏ�
+		ELSEIF ABL:��d���_ >= 3
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1629,34 +1629,34 @@ IF SELECTCOM == 81
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ニプルファック
+;�j�v���t�@�b�N
 ;-------------------------------------------------
 IF SELECTCOM == 82
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1664,32 +1664,32 @@ IF SELECTCOM == 82
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;尿道挿入…細かく体位で分ける場合には以下の様になっている
-;83,尿道正常位
-;84,尿道後背位
-;85,尿道屈曲位
-;86,尿道対面座位
-;87,尿道背面座位
+;�A���}���c�ׂ����̈ʂŕ�����ꍇ�ɂ͈ȉ��̗l�ɂȂ��Ă���
+;83,�A�������
+;84,�A����w��
+;85,�A�����Ȉ�
+;86,�A���Ζʍ���
+;87,�A���w�ʍ���
 ;-------------------------------------------------
 IF SELECTCOM >= 83 && SELECTCOM <= 87
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;余裕が無い
-		IF CHECK("尿道インサート") == 0
+		;�]�T������
+		IF CHECK("�A���C���T�[�g") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;余裕が無い
-		IF CHECK("尿道インサート") == 0
+		;�]�T������
+		IF CHECK("�A���C���T�[�g") == 0
 			PRINTFORMW 
-		;恋慕
-		ELSEIF TALENT:恋慕
+		;����
+		ELSEIF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1697,34 +1697,34 @@ IF SELECTCOM >= 83 && SELECTCOM <= 87
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;尿道騎乗位
+;�A���R���
 ;-------------------------------------------------
 IF SELECTCOM == 88
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1732,20 +1732,20 @@ IF SELECTCOM == 88
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ぱふぱふ手コキ
-;手淫とぱふぱふから派生する
+;�ςӂςӎ�R�L
+;����Ƃςӂςӂ���h������
 ;-------------------------------------------------
-IF CHECK_COM("ぱふぱふ手コキ")
-	;恋慕
-	IF TALENT:恋慕
-		IF COND("母乳飲みフラグ", PLAYER)
+IF CHECK_COM("�ςӂςӎ�R�L")
+	;����
+	IF TALENT:����
+		IF COND("������݃t���O", PLAYER)
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		IF COND("母乳飲みフラグ", PLAYER)
+		IF COND("������݃t���O", PLAYER)
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
@@ -1755,28 +1755,28 @@ IF CHECK_COM("ぱふぱふ手コキ")
 ENDIF
 
 ;-------------------------------------------------
-;手淫
+;���
 ;-------------------------------------------------
 IF SELECTCOM == 90
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1785,56 +1785,56 @@ IF SELECTCOM == 90
 ENDIF
 
 ;-------------------------------------------------
-;フェラチオ
+;�t�F���`�I
 ;-------------------------------------------------
 IF SELECTCOM == 91
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	ELSEIF CHECK_COM("ペニスキス")
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	ELSEIF CHECK_COM("�y�j�X�L�X")
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;みんな大好きお掃除フェラ
-	ELSEIF CHECK_COM("お掃除フェラ")
-		;恥垢もお掃除
-		IF CHECK_COM("恥垢お掃除フェラ")
+	;�݂�ȑ�D�����|���t�F��
+	ELSEIF CHECK_COM("���|���t�F��")
+		;�p�C�����|��
+		IF CHECK_COM("�p�C���|���t�F��")
 			PRINTFORMW 
-		;恋慕
-		ELSEIF TALENT:恋慕 && RANDIF(1, ABL:奉仕精神 >= 3)
+		;����
+		ELSEIF TALENT:���� && RANDIF(1, ABL:��d���_ >= 3)
 			PRINTFORMW 
-		;奉仕精神Lv3以上
-		ELSEIF ABL:奉仕精神 >= 3 && RAND:2
+		;��d���_Lv3�ȏ�
+		ELSEIF ABL:��d���_ >= 3 && RAND:2
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1843,28 +1843,28 @@ IF SELECTCOM == 91
 ENDIF
 
 ;-------------------------------------------------
-;パイズリ
+;�p�C�Y��
 ;-------------------------------------------------
 IF SELECTCOM == 92
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1873,36 +1873,36 @@ IF SELECTCOM == 92
 ENDIF
 
 ;-------------------------------------------------
-;素股
+;�f��
 ;-------------------------------------------------
 IF SELECTCOM == 93
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	ELSEIF CHECK_COM("見せ槍")
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	ELSEIF CHECK_COM("������")
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1911,28 +1911,28 @@ IF SELECTCOM == 93
 ENDIF
 
 ;-------------------------------------------------
-;泡踊り
+;�A�x��
 ;-------------------------------------------------
 IF SELECTCOM == 94
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1940,34 +1940,34 @@ IF SELECTCOM == 94
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;足コキ(PENIS(PLAYER)で調教者のチンコの有無が確認できます)
+;���R�L(PENIS(PLAYER)�Œ����҂̃`���R�̗L�����m�F�ł��܂�)
 ;-------------------------------------------------
 IF SELECTCOM == 95
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -1976,28 +1976,28 @@ IF SELECTCOM == 95
 ENDIF
 
 ;-------------------------------------------------
-;アナル奉仕
+;�A�i����d
 ;-------------------------------------------------
 IF SELECTCOM == 96
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2005,28 +2005,28 @@ IF SELECTCOM == 96
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ぱんつコキ
+;�ς�R�L
 ;-------------------------------------------------
 IF SELECTCOM == 97
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2034,34 +2034,34 @@ IF SELECTCOM == 97
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;奉仕クンニ
+;��d�N���j
 ;-------------------------------------------------
 IF SELECTCOM == 98
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2070,28 +2070,28 @@ IF SELECTCOM == 98
 ENDIF
 
 ;-------------------------------------------------
-;シックスナイン
+;�V�b�N�X�i�C��
 ;-------------------------------------------------
 IF SELECTCOM == 99
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2099,28 +2099,28 @@ IF SELECTCOM == 99
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ぱふぱふ
+;�ςӂς�
 ;-------------------------------------------------
 IF SELECTCOM == 104
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2128,28 +2128,28 @@ IF SELECTCOM == 104
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;オナホコキ
+;�I�i�z�R�L
 ;-------------------------------------------------
 IF SELECTCOM == 105
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2158,34 +2158,34 @@ IF SELECTCOM == 105
 ENDIF
 
 ;-------------------------------------------------
-;逆バイブ
+;�t�o�C�u
 ;-------------------------------------------------
 IF SELECTCOM == 106
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2193,34 +2193,34 @@ IF SELECTCOM == 106
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;逆Ａバイブ
+;�t�`�o�C�u
 ;-------------------------------------------------
 IF SELECTCOM == 107
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2229,14 +2229,14 @@ IF SELECTCOM == 107
 ENDIF
 
 ;-------------------------------------------------
-;Ｖ逆挿入系初選択
+;�u�t�}���n���I��
 ;-------------------------------------------------
-IF SELECTCOM >= 120 && SELECTCOM <= 124 && FIRSTCOMS("Ｖ逆挿入") == 0
-	;調教者が処女
-	IF TALENT:PLAYER:処女
-		IF TALENT:恋慕
+IF SELECTCOM >= 120 && SELECTCOM <= 124 && FIRSTCOMS("�u�t�}��") == 0
+	;�����҂�����
+	IF TALENT:PLAYER:����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2244,34 +2244,34 @@ IF SELECTCOM >= 120 && SELECTCOM <= 124 && FIRSTCOMS("Ｖ逆挿入") == 0
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;正常位奉仕
+;����ʕ�d
 ;-------------------------------------------------
 IF SELECTCOM == 120
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2280,34 +2280,34 @@ IF SELECTCOM == 120
 ENDIF
 
 ;-------------------------------------------------
-;後背位奉仕
+;��w�ʕ�d
 ;-------------------------------------------------
 IF SELECTCOM == 121
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2316,18 +2316,18 @@ IF SELECTCOM == 121
 ENDIF
 
 ;-------------------------------------------------
-;騎乗位で犯す
+;�R��ʂŔƂ�
 ;-------------------------------------------------
 IF SELECTCOM == 122
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2336,34 +2336,34 @@ IF SELECTCOM == 122
 ENDIF
 
 ;-------------------------------------------------
-;Ａ正常位奉仕
+;�`����ʕ�d
 ;-------------------------------------------------
 IF SELECTCOM == 125
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2372,34 +2372,34 @@ IF SELECTCOM == 125
 ENDIF
 
 ;-------------------------------------------------
-;Ａ後背位奉仕
+;�`��w�ʕ�d
 ;-------------------------------------------------
 IF SELECTCOM == 126
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2408,18 +2408,18 @@ IF SELECTCOM == 126
 ENDIF
 
 ;-------------------------------------------------
-;Ａ騎乗位で犯す
+;�`�R��ʂŔƂ�
 ;-------------------------------------------------
 IF SELECTCOM == 127
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2428,19 +2428,19 @@ IF SELECTCOM == 127
 ENDIF
 
 ;-------------------------------------------------
-;スパンキング
-;あんまり痛くしません。ぴしゃぴしゃ
+;�X�p���L���O
+;����܂�ɂ����܂���B�҂���҂���
 ;-------------------------------------------------
 IF SELECTCOM == 130
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2449,27 +2449,27 @@ IF SELECTCOM == 130
 ENDIF
 
 ;-------------------------------------------------
-;アイマスク
+;�A�C�}�X�N
 ;-------------------------------------------------
 IF SELECTCOM == 133
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;終了時
-	ELSEIF TEQUIP:アイマスク == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:�A�C�}�X�N == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2478,27 +2478,27 @@ IF SELECTCOM == 133
 ENDIF
 
 ;-------------------------------------------------
-;拘束する
+;�S������
 ;-------------------------------------------------
 IF SELECTCOM == 134
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;終了時
-	ELSEIF TEQUIP:拘束 == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:�S�� == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2507,29 +2507,29 @@ IF SELECTCOM == 134
 ENDIF
 
 ;-------------------------------------------------
-;口枷
-;何を付けたかはCOND("ボールギャグ")、COND("開口リング")で判定できる
-;付ける前のセリフは@KOJO_MESSAGE_BEFORE_COMに書くのも良いでしょう
+;���g
+;����t��������COND("�{�[���M���O")�ACOND("�J�������O")�Ŕ���ł���
+;�t����O�̃Z���t��@KOJO_MESSAGE_BEFORE_COM�ɏ����̂��ǂ��ł��傤
 ;-------------------------------------------------
 IF SELECTCOM == 135
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;終了時
-	ELSEIF TEQUIP:口枷 == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:���g == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2538,28 +2538,28 @@ IF SELECTCOM == 135
 ENDIF
 
 ;-------------------------------------------------
-;浣腸
-;大量に液体を注いだかはCOND("大量浣腸")で判定できます
+;����
+;��ʂɉt�̂𒍂�������COND("��ʟ���")�Ŕ���ł��܂�
 ;-------------------------------------------------
 IF SELECTCOM == 136
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;排泄
-	ELSEIF TEQUIP:浣腸 == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�r��
+	ELSEIF TEQUIP:���� == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2569,148 +2569,148 @@ ENDIF
 
 
 ;-------------------------------------------------
-;浴尿させる
-;とはいえまだ浴尿は出来ません
-;直前にフェラ系コマンドなら口内放尿、セックス系なら膣内放尿、Ａセックス系なら温泉浣腸となる
-;別のコマンドが複数つまっているようなものなので正直な所、分岐が多くて煩雑です
+;���A������
+;�Ƃ͂����܂����A�͏o���܂���
+;���O�Ƀt�F���n�R�}���h�Ȃ�������A�A�Z�b�N�X�n�Ȃ��S�����A�A�`�Z�b�N�X�n�Ȃ牷�򟯒��ƂȂ�
+;�ʂ̃R�}���h�������܂��Ă���悤�Ȃ��̂Ȃ̂Ő����ȏ��A���򂪑����ĔώG�ł�
 ;-------------------------------------------------
 IF SELECTCOM == 138
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	IF CHECK_COM("口内放尿")
-		;初めて
-		IF EXP:飲尿経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("口内放尿") == 0
+	IF CHECK_COM("�������A")
+		;���߂�
+		IF EXP:���A�o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�������A") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("口内放尿") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�������A") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
-	ELSEIF CHECK_COM("子宮内放尿")
-		;初めて
-		IF EXP:子宮浴尿経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("子宮内放尿") == 0
+	ELSEIF CHECK_COM("�q�{�����A")
+		;���߂�
+		IF EXP:�q�{���A�o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�q�{�����A") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("子宮内放尿") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�q�{�����A") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
-	ELSEIF CHECK_COM("膣内放尿")
-		;初めて
-		IF EXP:膣内浴尿経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("膣内放尿") == 0
+	ELSEIF CHECK_COM("�S�����A")
+		;���߂�
+		IF EXP:�S�����A�o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�S�����A") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("膣内放尿") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�S�����A") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
-	ELSEIF CHECK_COM("温泉浣腸")
-		;初めて
-		IF EXP:温泉浣腸経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("温泉浣腸") == 0
+	ELSEIF CHECK_COM("���򟯒�")
+		;���߂�
+		IF EXP:���򟯒��o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("���򟯒�") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("温泉浣腸") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("���򟯒�") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
-	ELSEIF CHECK_COM("乳内放尿")
-		;初めて
-		IF EXP:乳内浴尿経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("乳内放尿") == 0
+	ELSEIF CHECK_COM("�������A")
+		;���߂�
+		IF EXP:�������A�o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�������A") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("乳内放尿") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�������A") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
-	ELSEIF CHECK_COM("膀胱内放尿")
-		;初めて
-		IF EXP:輸尿経験 == 0
-			;プレイを受け入れていない
-			IF CHECK("膀胱内放尿") == 0
+	ELSEIF CHECK_COM("�N�������A")
+		;���߂�
+		IF EXP:�A�A�o�� == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�N�������A") == 0
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;二回目以降
+		;���ڈȍ~
 		ELSE
-			;プレイを受け入れていない
-			IF CHECK("膀胱内放尿") == 0
+			;�v���C���󂯓���Ă��Ȃ�
+			IF CHECK("�N�������A") == 0
 				PRINTFORMW 
-			;恋慕
-			ELSEIF TALENT:恋慕
+			;����
+			ELSEIF TALENT:����
 				PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				PRINTFORMW 
 			ENDIF
@@ -2720,20 +2720,20 @@ IF SELECTCOM == 138
 ENDIF
 
 ;-------------------------------------------------
-;何もしない
+;�������Ȃ�
 ;-------------------------------------------------
 IF SELECTCOM == 139
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2741,20 +2741,20 @@ IF SELECTCOM == 139
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;イラマチオ
+;�C���}�`�I
 ;-------------------------------------------------
 IF SELECTCOM == 140
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2763,38 +2763,38 @@ IF SELECTCOM == 140
 ENDIF
 
 ;-------------------------------------------------
-;フィスト系コマンド
+;�t�B�X�g�n�R�}���h
 ;-------------------------------------------------
 IF SELECTCOM == 141 || SELECTCOM == 142 || SELECTCOM == 143
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;楽しめる余裕が無い
-		IF CHECK("フィスト") == 0
-			;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+		;�y���߂�]�T������
+		IF CHECK("�t�B�X�g") == 0
+			;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 			RETURN 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;楽しめる余裕が無い
-		IF CHECK("フィスト") == 0
-			;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+		;�y���߂�]�T������
+		IF CHECK("�t�B�X�g") == 0
+			;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 			RETURN 0
 			PRINTFORMW 
-		;結腸まで腕を捻じ込んだ
-		ELSEIF CHECK_COM("結腸責め")
-			IF TALENT:結腸性感
+		;�����܂Řr��P������
+		ELSEIF CHECK_COM("�����ӂ�")
+			IF TALENT:��������
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;恋慕
-		ELSEIF TALENT:恋慕
+		;����
+		ELSEIF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2803,34 +2803,34 @@ IF SELECTCOM == 141 || SELECTCOM == 142 || SELECTCOM == 143
 ENDIF
 
 ;-------------------------------------------------
-;放尿　聖水プレイ(押し倒している時)
+;���A�@�����v���C(�����|���Ă��鎞)
 ;-------------------------------------------------
 IF SELECTCOM == 144
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;聖水プレイ
-		IF TEQUIP:押し倒し
+		;�����v���C
+		IF TEQUIP:�����|��
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
-	;聖水プレイ
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
+	;���ڈȍ~
+	;�����v���C
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2838,37 +2838,37 @@ IF SELECTCOM == 144
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;剃毛
+;���
 ;-------------------------------------------------
 IF SELECTCOM == 145
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;行為に抵抗あり
-		IF CHECK("陰毛管理") == 0
-			;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+		;�s�ׂɒ�R����
+		IF CHECK("�A�ъǗ�") == 0
+			;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 			RETURN 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;行為に抵抗あり
-		IF CHECK("陰毛管理") == 0
-			;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+		;�s�ׂɒ�R����
+		IF CHECK("�A�ъǗ�") == 0
+			;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 			RETURN 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
-			SELECTCASE CONDS("陰毛")
-			;脱毛した
-			CASE "脱毛処理"
+			SELECTCASE CONDS("�A��")
+			;�E�т���
+			CASE "�E�я���"
 				PRINTFORMW 
-			;ツルツルに剃り上げた
-			CASE "ツルツル"
+			;�c���c���ɒ��グ��
+			CASE "�c���c��"
 				PRINTFORMW 
-			;綺麗に剃り整えた
+			;�Y��ɒ�萮����
 			CASEELSE
 				PRINTFORMW 
 			ENDSELECT
@@ -2877,70 +2877,70 @@ IF SELECTCOM == 145
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;身嗜み管理
+;�g�n�݊Ǘ�
 ;-------------------------------------------------
 IF SELECTCOM == 146
-	;陰毛の状態を指示
-	IF CHECK_COM("身嗜み：陰毛")
-		SELECTCASE COND("身嗜み：陰毛")
-		;ツルツル
+	;�A�т̏�Ԃ��w��
+	IF CHECK_COM("�g�n�݁F�A��")
+		SELECTCASE COND("�g�n�݁F�A��")
+		;�c���c��
 		CASE 3
 			PRINTFORMW 
-		;剃り整える
+		;��萮����
 		CASE 5
 			PRINTFORMW 
-		;剃らない
+		;���Ȃ�
 		CASE 7
 			PRINTFORMW 
 		ENDSELECT
-	;腋毛の状態を指示
-	ELSEIF CHECK_COM("身嗜み：腋毛")
-		SELECTCASE COND("身嗜み：腋毛")
-		;ツルツル
+	;���т̏�Ԃ��w��
+	ELSEIF CHECK_COM("�g�n�݁F����")
+		SELECTCASE COND("�g�n�݁F����")
+		;�c���c��
 		CASE 3
 			PRINTFORMW 
-		;剃らない
+		;���Ȃ�
 		CASE 7
 			PRINTFORMW 
 		ENDSELECT
-	;常に膣を拡張しておくように指示
-	ELSEIF CHECK_COM("身嗜み：Ｖ拡張")
-		;大きさで分岐
-		SELECTCASE COND("身嗜み：Ｖ拡張")
-		;指示解除
+	;����S���g�����Ă����悤�Ɏw��
+	ELSEIF CHECK_COM("�g�n�݁F�u�g��")
+		;�傫���ŕ���
+		SELECTCASE COND("�g�n�݁F�u�g��")
+		;�w������
 		CASE 0
 			PRINTFORMW 
 		CASEELSE
 			PRINTFORMW 
 		ENDSELECT
-	;常にアナルを拡張しておくように指示
-	ELSEIF CHECK_COM("身嗜み：Ａ拡張")
-		;大きさで分岐
-		SELECTCASE COND("身嗜み：Ａ拡張")
-		;指示解除
+	;��ɃA�i�����g�����Ă����悤�Ɏw��
+	ELSEIF CHECK_COM("�g�n�݁F�`�g��")
+		;�傫���ŕ���
+		SELECTCASE COND("�g�n�݁F�`�g��")
+		;�w������
 		CASE 0
 			PRINTFORMW 
 		CASEELSE
 			PRINTFORMW 
 		ENDSELECT
-	;いつでもお尻でエロいことできるように指示
-	ELSEIF CHECK_COM("身嗜み：Ａ準備")
-		;呼ばれたら腸内を綺麗にしておくように指示
-		IF COND("身嗜み：腸洗浄")
+	;���ł����K�ŃG�������Ƃł���悤�Ɏw��
+	ELSEIF CHECK_COM("�g�n�݁F�`����")
+		;�Ă΂ꂽ�環�����Y��ɂ��Ă����悤�Ɏw��
+		IF COND("�g�n�݁F�����")
 			PRINTFORMW 
-		;ローションを用意するように指示
+		;���[�V������p�ӂ���悤�Ɏw��
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;それ以外
-	;CHECK_COM("身嗜み：Ｐ準備"), CHECK_COM("身嗜み：Ｖ準備"), CHECK_COM("身嗜み：服装")
-	;CHECK_COM("身嗜み：尿道拡張"), CHECK_COM("身嗜み：性行為の制限"), CHECK_COM("身嗜み：性欲の管理")
-	;などでも分岐可能。
+	;����ȊO
+	;CHECK_COM("�g�n�݁F�o����"), CHECK_COM("�g�n�݁F�u����"), CHECK_COM("�g�n�݁F����")
+	;CHECK_COM("�g�n�݁F�A���g��"), CHECK_COM("�g�n�݁F���s�ׂ̐���"), CHECK_COM("�g�n�݁F���~�̊Ǘ�")
+	;�Ȃǂł�����\�B
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -2949,19 +2949,19 @@ IF SELECTCOM == 146
 ENDIF
 
 ;-------------------------------------------------
-;ゴム精飲
+;�S������
 ;-------------------------------------------------
 IF SELECTCOM == 147
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		IF ABL:精液中毒 >= 3
+		IF ABL:���t���� >= 3
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		IF ABL:精液中毒 >= 3
+		IF ABL:���t���� >= 3
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
@@ -2970,48 +2970,48 @@ IF SELECTCOM == 147
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;ピアッシング
+;�s�A�b�V���O
 ;-------------------------------------------------
 IF SELECTCOM == 148
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;こういうのは好きじゃない
-		IF CHECK("ピアッシング") == 0
+		;���������͍̂D������Ȃ�
+		IF CHECK("�s�A�b�V���O") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;こういうのは好きじゃない
-		IF CHECK("ピアッシング") == 0
+		;���������͍̂D������Ȃ�
+		IF CHECK("�s�A�b�V���O") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
-			;ＯＮフラグが付けた際のセリフです
-			IF COND("クリピアスフラグ")
-				IF COND("ピアスＯＮフラグ")
+			;�n�m�t���O���t�����ۂ̃Z���t�ł�
+			IF COND("�N���s�A�X�t���O")
+				IF COND("�s�A�X�n�m�t���O")
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
 				ENDIF
-			ELSEIF COND("ラビアピアスフラグ")
-				IF COND("ピアスＯＮフラグ")
+			ELSEIF COND("���r�A�s�A�X�t���O")
+				IF COND("�s�A�X�n�m�t���O")
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
 				ENDIF
-			ELSEIF COND("ニプルピアスフラグ")
-				IF COND("ピアスＯＮフラグ")
+			ELSEIF COND("�j�v���s�A�X�t���O")
+				IF COND("�s�A�X�n�m�t���O")
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
 				ENDIF
-			ELSEIF COND("へそピアスフラグ")
-				IF COND("ピアスＯＮフラグ")
+			ELSEIF COND("�ւ��s�A�X�t���O")
+				IF COND("�s�A�X�n�m�t���O")
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
@@ -3023,27 +3023,27 @@ IF SELECTCOM == 148
 ENDIF
 
 ;-------------------------------------------------
-;カテーテル
+;�J�e�[�e��
 ;-------------------------------------------------
 IF SELECTCOM == 149
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;痛い！
-		IF CHECK("尿道プレイ") == 0
+		;�ɂ��I
+		IF CHECK("�A���v���C") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;抜いた
-	ELSEIF TEQUIP:カテーテル == 0
+	;������
+	ELSEIF TEQUIP:�J�e�[�e�� == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;痛い！
-		IF CHECK("尿道プレイ") == 0
+		;�ɂ��I
+		IF CHECK("�A���v���C") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3052,39 +3052,39 @@ IF SELECTCOM == 149
 ENDIF
 
 ;-------------------------------------------------
-;ディープスロート
+;�f�B�[�v�X���[�g
 ;-------------------------------------------------
 IF SELECTCOM == 150
-	;口上を書く際には RETURN 0 を削除してください(もともと地の文が長めなので書かなくても問題ないかもしれません)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(���Ƃ��ƒn�̕������߂Ȃ̂ŏ����Ȃ��Ă����Ȃ���������܂���)
 	RETURN 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;尿道ブジー
+;�A���u�W�[
 ;-------------------------------------------------
 IF SELECTCOM == 151
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;痛い！
-		IF CHECK("尿道プレイ") == 0
+		;�ɂ��I
+		IF CHECK("�A���v���C") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;痛い！
-		IF CHECK("尿道プレイ") == 0
+		;�ɂ��I
+		IF CHECK("�A���v���C") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3093,27 +3093,27 @@ IF SELECTCOM == 151
 ENDIF
 
 ;-------------------------------------------------
-;ビデオカメラ使用
+;�r�f�I�J�����g�p
 ;-------------------------------------------------
 IF SELECTCOM == 170
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;終了時
-	ELSEIF TEQUIP:ビデオカメラ == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:�r�f�I�J���� == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3122,35 +3122,35 @@ IF SELECTCOM == 170
 ENDIF
 
 ;-------------------------------------------------
-;野外プレイ
-;まだ仕様が決まってない
+;��O�v���C
+;�܂��d�l�����܂��ĂȂ�
 ;-------------------------------------------------
 IF SELECTCOM == 171
 	RETURN 1
 ENDIF
 
 ;-------------------------------------------------
-;お風呂場プレイ
+;�����C��v���C
 ;-------------------------------------------------
 IF SELECTCOM == 172
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;終了時
-	ELSEIF TEQUIP:お風呂プレイ == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:�����C�v���C == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3159,33 +3159,33 @@ IF SELECTCOM == 172
 ENDIF
 
 ;-------------------------------------------------
-;新妻プレイ
+;�V�ȃv���C
 ;-------------------------------------------------
 IF SELECTCOM == 173
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;終了時
-	ELSEIF TEQUIP:新妻プレイ == 0
-		;恋慕
-		IF TALENT:恋慕
+	;�I����
+	ELSEIF TEQUIP:�V�ȃv���C == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3193,99 +3193,99 @@ IF SELECTCOM == 173
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;館内露出プレイ
-;まだ仕様が決まってない
+;�ٓ��I�o�v���C
+;�܂��d�l�����܂��ĂȂ�
 ;-------------------------------------------------
 IF SELECTCOM == 174
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;着せ替え
+;�����ւ�
 ;-------------------------------------------------
 IF SELECTCOM == 175
-	;服、ボディスーツ、水着に着替えた時
-	IF CHECK_COM("着せ替え：服を着替えた")
-		IF CHECK_CLO("自分の服")
+	;���A�{�f�B�X�[�c�A�����ɒ��ւ�����
+	IF CHECK_COM("�����ւ��F���𒅑ւ���")
+		IF CHECK_CLO("�����̕�")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("Ｙシャツ")
+		ELSEIF CHECK_SHIRT("�x�V���c")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("女教師")
+		ELSEIF CHECK_SHIRT("�����t")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("和服")
+		ELSEIF CHECK_SHIRT("�a��")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("メイド服")
+		ELSEIF CHECK_SHIRT("���C�h��")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("体操服")
+		ELSEIF CHECK_SHIRT("�̑���")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("看護婦")
+		ELSEIF CHECK_SHIRT("�Ō�w")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("チャイナドレス")
+		ELSEIF CHECK_SHIRT("�`���C�i�h���X")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("セーラー服")
+		ELSEIF CHECK_SHIRT("�Z�[���[��")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("巫女")
+		ELSEIF CHECK_SHIRT("�ޏ�")
 			PRINTFORMW 
-		ELSEIF CHECK_SHIRT("ベビードール")
+		ELSEIF CHECK_SHIRT("�x�r�[�h�[��")
 			PRINTFORMW 
-		ELSEIF CHECK_CLO("ビキニ姿")
+		ELSEIF CHECK_CLO("�r�L�j�p")
 			PRINTFORMW 
-		ELSEIF CHECK_BODYS("ボンデージ")
+		ELSEIF CHECK_BODYS("�{���f�[�W")
 			PRINTFORMW 
-		ELSEIF CHECK_BODYS("バニー")
+		ELSEIF CHECK_BODYS("�o�j�[")
 			PRINTFORMW 
-		;その他
+		;���̑�
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;胸も股間も丸出し状態になった時
-	ELSEIF CHECK_COM("着せ替え：ハダカになった")
-		;恋慕
-		IF TALENT:恋慕
+	;�����ҊԂ��ۏo����ԂɂȂ�����
+	ELSEIF CHECK_COM("�����ւ��F�n�_�J�ɂȂ���")
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;露出癖Lv3
-		ELSEIF ABL:露出癖 >= 3
+		;�I�o��Lv3
+		ELSEIF ABL:�I�o�� >= 3
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;パンツを変えたり脱いだり
-	ELSEIF CHECK_COM("着せ替え：パンツ")
-		IF EQUIP:パンツ
+	;�p���c��ς�����E������
+	ELSEIF CHECK_COM("�����ւ��F�p���c")
+		IF EQUIP:�p���c
 			PRINTFORMW 
-		;ノーパンです
+		;�m�[�p���ł�
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;以下は面倒ならELSE でひとまとめでも良いでしょう
-	ELSEIF CHECK_COM("着せ替え：アウター")
+	;�ȉ��͖ʓ|�Ȃ�ELSE �łЂƂ܂Ƃ߂ł��ǂ��ł��傤
+	ELSEIF CHECK_COM("�����ւ��F�A�E�^�[")
 		PRINTFORMW 
-	ELSEIF CHECK_COM("着せ替え：ブラ")
+	ELSEIF CHECK_COM("�����ւ��F�u��")
 		PRINTFORMW 
-	ELSEIF CHECK_COM("着せ替え：手袋")
+	ELSEIF CHECK_COM("�����ւ��F���")
 		PRINTFORMW 
-	ELSEIF CHECK_COM("着せ替え：靴下")
+	ELSEIF CHECK_COM("�����ւ��F�C��")
 		PRINTFORMW 
-	ELSEIF CHECK_COM("着せ替え：靴")
+	ELSEIF CHECK_COM("�����ւ��F�C")
 		PRINTFORMW 
-	;アクセサリの付け替えやその他
+	;�A�N�Z�T���̕t���ւ��₻�̑�
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;押し倒される
+;�����|�����
 ;-------------------------------------------------
 IF SELECTCOM == 176
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3294,18 +3294,18 @@ IF SELECTCOM == 176
 ENDIF
 
 ;-------------------------------------------------
-;ローション使用
+;���[�V�����g�p
 ;-------------------------------------------------
 IF SELECTCOM == 260
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3313,18 +3313,18 @@ IF SELECTCOM == 260
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;媚薬使用
+;�Z��g�p
 ;-------------------------------------------------
 IF SELECTCOM == 261
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3332,18 +3332,18 @@ IF SELECTCOM == 261
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;利尿剤
+;���A��
 ;-------------------------------------------------
 IF SELECTCOM == 262
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3351,18 +3351,18 @@ IF SELECTCOM == 262
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;排卵誘発剤
+;�r���U����
 ;-------------------------------------------------
 IF SELECTCOM == 264
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3370,18 +3370,18 @@ IF SELECTCOM == 264
 	RETURN 1
 ENDIF
 ;-------------------------------------------------
-;筋弛緩剤
+;�ؒo�ɍ�
 ;-------------------------------------------------
 IF SELECTCOM == 267
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3390,13 +3390,13 @@ IF SELECTCOM == 267
 ENDIF
 
 ;-------------------------------------------------
-;もがく
+;������
 ;-------------------------------------------------
 IF SELECTCOM == 280
-	;成功
-	IF TEQUIP:押し倒し == 0
+	;����
+	IF TEQUIP:�����|�� == 0
 		PRINTFORMW 
-	;失敗
+	;���s
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -3404,21 +3404,21 @@ IF SELECTCOM == 280
 ENDIF
 
 ;-------------------------------------------------
-;自慰する
-;自慰の種類についてはTEQUIP:PLAYER:自慰するの値で分岐可能
-;==1クンニ, ==4フェラする, ==9アナル舐め, ==13くぱぁ, ==14Ａくぱぁ など
+;���Ԃ���
+;���Ԃ̎�ނɂ��Ă�TEQUIP:PLAYER:���Ԃ���̒l�ŕ���\
+;==1�N���j, ==4�t�F������, ==9�A�i���r��, ==13���ς�, ==14�`���ς� �Ȃ�
 ;-------------------------------------------------
 IF SELECTCOM == 282
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		IF TALENT:恋慕
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		IF TALENT:恋慕
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
@@ -3428,26 +3428,26 @@ IF SELECTCOM == 282
 ENDIF
 
 ;-------------------------------------------------
-;甘い言葉
+;�Â����t
 ;-------------------------------------------------
 IF SELECTCOM == 283
-	;口上を書く際には RETURN 0 を削除してください(何も喋らない場合には地の文が強化されます)
+	;����������ۂɂ� RETURN 0 ���폜���Ă�������(��������Ȃ��ꍇ�ɂ͒n�̕�����������܂�)
 	RETURN 0
-	;成功
-	IF TEQUIP:甘い言葉
-		;恋慕
-		IF TALENT:恋慕
+	;����
+	IF TEQUIP:�Â����t
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;失敗
+	;���s
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -3456,729 +3456,729 @@ IF SELECTCOM == 283
 ENDIF
 
 ;--------------------------------------------------
-;調教コマンドの地の文の前に喋る台詞はここに書く
+;�����R�}���h�̒n�̕��̑O�ɒ���䎌�͂����ɏ���
 ;--------------------------------------------------
-;もし地の文をスキップさせたいならここでSELECTCOMしてからTFLAG:地の文スキップ = 1をぶち込む必要がある
-;っていうか地の文書きたいなら全部ここに書いたらいいかも？
-;地の文は豊富でいいんだけど口上との矛盾が生まれた場合もやもやする
+;�����n�̕����X�L�b�v���������Ȃ炱����SELECTCOM���Ă���TFLAG:�n�̕��X�L�b�v = 1���Ԃ����ޕK�v������
+;���Ă������n�̕����������Ȃ�S�������ɏ������炢�������H
+;�n�̕��͖L�x�ł����񂾂��ǌ���Ƃ̖��������܂ꂽ�ꍇ������₷��
 @KOJO_MESSAGE_BEFORE_COM_K33
-;口枷着用時には口上をスキップする？
-SIF TEQUIP:口枷 && SELECTCOM != 135
+;���g���p���ɂ͌�����X�L�b�v����H
+SIF TEQUIP:���g && SELECTCOM != 135
 	RETURN 0
-;助手に対応してない間は地の文オンリーにする措置
+;����ɑΉ����ĂȂ��Ԃ͒n�̕��I�����[�ɂ���[�u
 SIF ASSIPLAY
 	RETURN 0
-;地の文スキップさせるやつ
-;0愛撫
+;�n�̕��X�L�b�v��������
+;0����
 IF SELECTCOM == 0
-	;初めて
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の未発達な体を探るように触れてみた
-		PRINTFORMW %CALLNAME:TARGET%の肌は若々しくすべすべで、とても撫で心地が良い…
+		PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̖����B�ȑ̂�T��悤�ɐG��Ă݂�
+		PRINTFORMW %CALLNAME:TARGET%�̔��͎�X�������ׂ��ׂŁA�ƂĂ����ŐS�n���ǂ��c
 		PRINTL
-		PRINTFORMW 「ちょっとくすぐったい、です……」
-		TFLAG:地の文スキップ = 1
-	;二回目以降
+		PRINTFORMW �u������Ƃ������������A�ł��c�c�v
+		TFLAG:�n�̕��X�L�b�v = 1
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			;PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			;PRINTFORMW 
 		ENDIF
 	ENDIF
 	RETURN 1
 ENDIF
-;1クンニ
+;1�N���j
 IF SELECTCOM == 1
-	;押し倒されているときは顔面騎乗になる
-	IF TEQUIP:押し倒し
-		;初めて
+	;�����|����Ă���Ƃ��͊�ʋR��ɂȂ�
+	IF TEQUIP:�����|��
+		;���߂�
 		IF FIRSTCOM_REV(SELECTCOM) == 0
 			;PRINTFORMW 
 		ELSE
-			;恋慕
-			IF TALENT:恋慕
+			;����
+			IF TALENT:����
 				;PRINTFORMW 
-			;それ以外
+			;����ȊO
 			ELSE
 				;PRINTFORMW 
 			ENDIF
 		ENDIF
 	ELSE
-		;一番最初に選ぶと万謝の口付けになる？
-		IF CHECK_COM("万謝の口付け")
-		;中出し後だとなる
-		ELSEIF CHECK_COM("お掃除クンニ")
-		;恥垢お掃除は趣味じゃないので考えない
-		;それ以外
+		;��ԍŏ��ɑI�ԂƖ��ӂ̌��t���ɂȂ�H
+		IF CHECK_COM("���ӂ̌��t��")
+		;���o���ゾ�ƂȂ�
+		ELSEIF CHECK_COM("���|���N���j")
+		;�p�C���|���͎����Ȃ��̂ōl���Ȃ�
+		;����ȊO
 		ELSE
-			;初めて
+			;���߂�
 			IF FIRSTCOM(SELECTCOM) == 0
-				PRINTFORM %CALLNAME:MASTER%は
-					SIF EQUIP:スカート
-						PRINTFORM %CALLNAME:TARGET%のスカートを捲り上げ、
-					IF CHECK_CLO("Ｖ露出")
-						PRINTFORMW %CALLNAME:TARGET%の秘部を見つめた…
+				PRINTFORM %CALLNAME:MASTER%��
+					SIF EQUIP:�X�J�[�g
+						PRINTFORM %CALLNAME:TARGET%�̃X�J�[�g������グ�A
+					IF CHECK_CLO("�u�I�o")
+						PRINTFORMW %CALLNAME:TARGET%�̔镔�����߂��c
 					ELSE
-						PRINTFORMW パンツをずらして%CALLNAME:TARGET%の秘部を曝け出した…
-						CALL SETFLAG, "ボトムを露出：テキスト無し", TARGET
+						PRINTFORMW �p���c�����炵��%CALLNAME:TARGET%�̔镔�𔘂��o�����c
+						CALL SETFLAG, "�{�g����I�o�F�e�L�X�g����", TARGET
 					ENDIF
-				PRINTFORMW まだ毛も生えないその場所は白磁のようにつるんとしており、
-				PRINTFORMW 芸術のような曲線美で一本のすじが描かれている…
-				;PRINTFORMW 美しさに感動する反面、禁断の果実に触れているような気になり頭がクラクラしてきそうだ…
+				PRINTFORMW �܂��т������Ȃ����̏ꏊ�͔����̂悤�ɂ��Ƃ��Ă���A
+				PRINTFORMW �|�p�̂悤�ȋȐ����ň�{�̂������`����Ă���c
+				;PRINTFORMW �������Ɋ������锽�ʁA�֒f�̉ʎ��ɐG��Ă���悤�ȋC�ɂȂ蓪���N���N�����Ă��������c
 				PRINTL
-				PRINTFORMW 「あの…%CNAME("二人称")%……？そ、そんなにじっと見られると、その…うぅ……」
+				PRINTFORMW �u���́c%CNAME("��l��")%�c�c�H���A����Ȃɂ����ƌ�����ƁA���́c�����c�c�v
 				PRINTL
-				PRINTFORMW 柔らかな饅頭を形を崩さずに割るように%CALLNAME:TARGET%の秘裂を割り広げると、
-				PRINTFORMW 淡いピンク色の成熟しきっていない幼い粘膜が露になった…
-				PRINTFORMW \@ TALENT:TARGET:処女 ? 糸を張ったような処女膜 # 小さな膣口 \@の向こう側はあなたを誘うかのように蠢いており、
-				PRINTFORMW 少しずつ愛液が垂れ流れてきている…
+				PRINTFORMW �_�炩���\�����`��������Ɋ���悤��%CALLNAME:TARGET%�̔�������L����ƁA
+				PRINTFORMW �W���s���N�F�̐��n�������Ă��Ȃ��c���S�����I�ɂȂ����c
+				PRINTFORMW \@ TALENT:TARGET:���� ? ���𒣂����悤�ȏ����� # �������S�� \@�̌��������͂��Ȃ���U�����̂悤��忂��Ă���A
+				PRINTFORMW ���������t�����ꗬ��Ă��Ă���c
 				PRINTL
-				PRINTFORMW 「はっ…はぁ…はっ……」
+				PRINTFORMW �u�͂��c�͂��c�͂��c�c�v
 				PRINTL
-				PRINTFORMW ふと%CALLNAME:TARGET%の様子を伺うと、恥ずかしさからか両手で顔を覆いながら呼吸を早めていた
-				PRINTFORMW %CALLNAME:TARGET%の呼吸が荒くなるにつれ分泌される愛液の量も増え、誘うような甘い香りが濃くなっていく…
-					IF EXP:MASTER:キス経験 == 0
-						PRINTFORMW %CALLNAME:MASTER%は欲望に抗えず、%CALLNAME:TARGET%の\@ TALENT:TARGET:処女 ? 処女膜 # 膣口 \@にキスをした…
-						CALL SET_CEVENT, "膣口に初キス"
+				PRINTFORMW �ӂ�%CALLNAME:TARGET%�̗l�q���f���ƁA�p�����������炩����Ŋ�𕢂��Ȃ���ċz�𑁂߂Ă���
+				PRINTFORMW %CALLNAME:TARGET%�̌ċz���r���Ȃ�ɂꕪ�傳��鈤�t�̗ʂ������A�U���悤�ȊÂ����肪�Z���Ȃ��Ă����c
+					IF EXP:MASTER:�L�X�o�� == 0
+						PRINTFORMW %CALLNAME:MASTER%�͗~�]�ɍR�����A%CALLNAME:TARGET%��\@ TALENT:TARGET:���� ? ������ # �S�� \@�ɃL�X�������c
+						CALL SET_CEVENT, "�S���ɏ��L�X"
 					ENDIF
 				PRINTL	
-				CALL PRINT_STR, @"「え！？な、何してるんですか、そんなとこなめたら…きたなひぃっ！_BHH_」_W"
+				CALL PRINT_STR, @"�u���I�H�ȁA�����Ă��ł����A����ȂƂ��Ȃ߂���c�����ȂЂ����I_BHH_�v_W"
 				PRINTL
-				PRINTFORMW %CALLNAME:MASTER%は愛液を舐め取るように、舌を伸ばして%CALLNAME:TARGET%の秘裂を下から上までなぞり上げると
-				PRINTFORMW 硬さのある突起に触れたところで、鈴は大きく腰を震わせた…
+				PRINTFORMW %CALLNAME:MASTER%�͈��t���r�ߎ��悤�ɁA���L�΂���%CALLNAME:TARGET%�̔����������܂łȂ���グ���
+				PRINTFORMW �d���̂���ˋN�ɐG�ꂽ�Ƃ���ŁA��͑傫������k�킹���c
 				PRINTL
-				CALL PRINT_STR, @"「や、やだ…んぅっ！_BHH_  や、やめ…んっ_BHH_  やめてくうぅっ！_BHH_  や、やぁあっ！_BHH_」_W"
+				CALL PRINT_STR, @"�u��A�₾�c�񂣂��I_BHH_  ��A��߁c���_BHH_  ��߂Ă��������I_BHH_  ��A�₟�����I_BHH_�v_W"
 				PRINTL
-				PRINTFORMW 未知の快楽から逃れようと、弱々しく抵抗してくる%CALLNAME:TARGET%にかまわず
-				PRINTFORMW あなたは溢れてくる蜜の味を確かめるように、繰り返し舌で掬い上げた…
-				TFLAG:地の文スキップ = 1
+				PRINTFORMW ���m�̉��y���瓦��悤�ƁA��X������R���Ă���%CALLNAME:TARGET%�ɂ��܂킸
+				PRINTFORMW ���Ȃ��͈��Ă��閨�̖����m���߂�悤�ɁA�J��Ԃ���ŋd���グ���c
+				TFLAG:�n�̕��X�L�b�v = 1
 			ELSE
-				;パンツずらしフラグ　パンツ越しクンニは考えずに初回でずらす
-				SIF CHECK_CLO("Ｖ露出") == 0
-					CALL SETFLAG, "ボトムを露出：テキスト無し", TARGET
+				;�p���c���炵�t���O�@�p���c�z���N���j�͍l�����ɏ���ł��炷
+				SIF CHECK_CLO("�u�I�o") == 0
+					CALL SETFLAG, "�{�g����I�o�F�e�L�X�g����", TARGET
 			ENDIF 
 		ENDIF
 	ENDIF
 ENDIF
-;5胸愛撫
+;5������
 IF SELECTCOM == 5
-;フラグよくわからない 0揉み　1弄り　10舐め　2ピアス
-CLEARBIT TEQUIP:胸愛撫, 2
-	;初めて
+;�t���O�悭�킩��Ȃ� 0���݁@1�M��@10�r�߁@2�s�A�X
+CLEARBIT TEQUIP:������, 2
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;初めてだろうが乳首舐めになってるときがある
-		IF CHECK_COM("乳首舐め") || CHECK_COM("乳首舐めに変化")
-			SETBIT TEQUIP:胸愛撫, 10
-			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の小さな胸の中で激しく主張している突起に目が行った
-			PRINTFORMW 誘われるように%CALLNAME:TARGET%の乳首を口に含むと、コロコロと舐め回してみた…
+		;���߂Ă��낤�������r�߂ɂȂ��Ă�Ƃ�������
+		IF CHECK_COM("�����r��") || CHECK_COM("�����r�߂ɕω�")
+			SETBIT TEQUIP:������, 10
+			PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̏����ȋ��̒��Ō������咣���Ă���ˋN�ɖڂ��s����
+			PRINTFORMW �U����悤��%CALLNAME:TARGET%�̓�������Ɋ܂ނƁA�R���R�����r�߉񂵂Ă݂��c
 			PRINTL
-			PRINTFORMW 「%CNAME("一人称", "どもり")%のおっぱいなんて、吸ってもたのしくないと思うんですけど……」
+			PRINTFORMW �u%CNAME("��l��", "�ǂ���")%�̂����ς��Ȃ�āA�z���Ă����̂����Ȃ��Ǝv����ł����ǁc�c�v
 		ELSE
-			SETBIT TEQUIP:胸愛撫, 1
-			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の胸に触れてみると、なだらかな起伏の中には違和感のある突起を見つけた
-			PRINTFORMW 確かめるように触ってみるが、胸の大きさにしては乳首が大きいような気がする…
+			SETBIT TEQUIP:������, 1
+			PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̋��ɐG��Ă݂�ƁA�Ȃ��炩�ȋN���̒��ɂ͈�a���̂���ˋN��������
+			PRINTFORMW �m���߂�悤�ɐG���Ă݂邪�A���̑傫���ɂ��Ă͓��񂪑傫���悤�ȋC������c
 			PRINTL
-			PRINTFORMW 「や、つままないでください…うぅ……」
+			PRINTFORMW �u��A�܂܂Ȃ��ł��������c�����c�c�v
 		ENDIF
-		TFLAG:地の文スキップ = 1
-	;よくわからんけど胸愛撫&乳首舐めになるときもある
-	ELSEIF CHECK_COM("胸揉み") && CHECK_COM("乳首舐め")
-		CLEARBIT TEQUIP:胸愛撫, 1
-		SETBIT TEQUIP:胸愛撫, 0
-		SETBIT TEQUIP:胸愛撫, 10
-		;PRINTW もみぺろ
-	;よくわからんけど連続で選択すると乳首舐めになる
-	ELSEIF CHECK_COM("乳首舐め") || CHECK_COM("乳首舐めに変化")
-		CLEARBIT TEQUIP:胸愛撫, 0
-		CLEARBIT TEQUIP:胸愛撫, 1
-		SETBIT TEQUIP:胸愛撫, 10
-		;PRINTW ぺろぺろ
-	;乳首弄りは確立で起こるから多分こっちで制御しても違和感はない
+		TFLAG:�n�̕��X�L�b�v = 1
+	;�悭�킩��񂯂ǋ�����&�����r�߂ɂȂ�Ƃ�������
+	ELSEIF CHECK_COM("������") && CHECK_COM("�����r��")
+		CLEARBIT TEQUIP:������, 1
+		SETBIT TEQUIP:������, 0
+		SETBIT TEQUIP:������, 10
+		;PRINTW ���݂؂�
+	;�悭�킩��񂯂ǘA���őI������Ɠ����r�߂ɂȂ�
+	ELSEIF CHECK_COM("�����r��") || CHECK_COM("�����r�߂ɕω�")
+		CLEARBIT TEQUIP:������, 0
+		CLEARBIT TEQUIP:������, 1
+		SETBIT TEQUIP:������, 10
+		;PRINTW �؂�؂�
+	;����M��͊m���ŋN���邩�瑽���������Ő��䂵�Ă���a���͂Ȃ�
 	ELSEIF RAND:2
-		CLEARBIT TEQUIP:胸愛撫, 0
-		CLEARBIT TEQUIP:胸愛撫, 10
-		SETBIT TEQUIP:胸愛撫, 1
-		;PRINTW くにくに
-	;その他は胸揉み扱い
+		CLEARBIT TEQUIP:������, 0
+		CLEARBIT TEQUIP:������, 10
+		SETBIT TEQUIP:������, 1
+		;PRINTW ���ɂ���
+	;���̑��͋����݈���
 	ELSE
-		CLEARBIT TEQUIP:胸愛撫, 1
-		CLEARBIT TEQUIP:胸愛撫, 10
-		SETBIT TEQUIP:胸愛撫, 0
-		;PRINTW もみもみ
+		CLEARBIT TEQUIP:������, 1
+		CLEARBIT TEQUIP:������, 10
+		SETBIT TEQUIP:������, 0
+		;PRINTW ���݂���
 	ENDIF
 ENDIF
-;6キス
+;6�L�X
 IF SELECTCOM == 6
-	;初めて
-	IF FIRSTCOM(SELECTCOM) == 0 && EXP:キス経験 == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
-		;それ以外
+	;���߂�
+	IF FIRSTCOM(SELECTCOM) == 0 && EXP:�L�X�o�� == 0
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
+		;����ȊO
 		ELSE
-			;お互いの初キスが性器
-			IF CEVENT("鈴口に初キス") && CEVENT("膣口に初キス")
-				PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%を抱き寄せて、至近距離で向かい合った…
+			;���݂��̏��L�X������
+			IF CEVENT("����ɏ��L�X") && CEVENT("�S���ɏ��L�X")
+				PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%������񂹂āA���ߋ����Ō������������c
 				PRINTL
-				PRINTFORMW 「あ……」
-				PRINTFORMW 「ふつうにキスするのははじめてですね……」
+				PRINTFORMW �u���c�c�v
+				PRINTFORMW �u�ӂ��ɃL�X����̂͂͂��߂Ăł��ˁc�c�v
 				PRINTL
-				PRINTFORMW 「んっ…、ちゅ……、んぅ……」
-				PRINTFORMW 「ぷぁ……、ふぅ……」
+				PRINTFORMW �u����c�A����c�c�A�񂣁c�c�v
+				PRINTFORMW �u�Ղ��c�c�A�ӂ��c�c�v
 				PRINTL
-				PRINTFORMW 唇と唇の橋が架かり、その橋が落ちて二人の視線が下がる…
+				PRINTFORMW �O�ƐO�̋����˂���A���̋��������ē�l�̎�����������c
 				PRINTL
-				PRINTFORMW 「つぎは…下でするんですか……？」
-				PRINTFORMW 「あ、いや、なんでもないです……」
-				TFLAG:地の文スキップ = 1
-			;さきにしゃぶらせた
-			ELSEIF CEVENT("鈴口に初キス")
-				PRINTFORMW %CALLNAME:MASTER%は不意に%CALLNAME:TARGET%を抱き寄せて、優しく口付けをした…
+				PRINTFORMW �u���́c���ł����ł����c�c�H�v
+				PRINTFORMW �u���A����A�Ȃ�ł��Ȃ��ł��c�c�v
+				TFLAG:�n�̕��X�L�b�v = 1
+			;�����ɂ���Ԃ点��
+			ELSEIF CEVENT("����ɏ��L�X")
+				PRINTFORMW %CALLNAME:MASTER%�͕s�ӂ�%CALLNAME:TARGET%������񂹂āA�D�������t���������c
 				PRINTL
-				PRINTFORMW 「んっ！…ぷはぁ……」
-				PRINTFORMW 「ひどいです、%CNAME("二人称")%…」
-				PRINTFORMW 「どうせしてくれるなら、おちんちんより…先にしてほしかったです……」
-				TFLAG:地の文スキップ = 1
-			;普通に初キス
+				PRINTFORMW �u����I�c�Ղ͂��c�c�v
+				PRINTFORMW �u�Ђǂ��ł��A%CNAME("��l��")%�c�v
+				PRINTFORMW �u�ǂ������Ă����Ȃ�A�����񂿂���c��ɂ��Ăق��������ł��c�c�v
+				TFLAG:�n�̕��X�L�b�v = 1
+			;���ʂɏ��L�X
 			ELSE
-				PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%を抱き寄せると、頭を撫でながら優しく口付けをした…
+				PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%������񂹂�ƁA���𕏂łȂ���D�������t���������c
 				PRINTL
-				PRINTFORMW 「ぷはぁ、はぁ…ふぅ……」
-				PRINTFORMW 「あまりよくわからないですけど…なんとなく%CNAME("二人称")%のやさしさが伝わってきます……」
-				TFLAG:地の文スキップ = 1
+				PRINTFORMW �u�Ղ͂��A�͂��c�ӂ��c�c�v
+				PRINTFORMW �u���܂�悭�킩��Ȃ��ł����ǁc�Ȃ�ƂȂ�%CNAME("��l��")%�̂₳�������`����Ă��܂��c�c�v
+				TFLAG:�n�̕��X�L�b�v = 1
 			ENDIF
 		ENDIF
-	;二回目以降
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
-		;それ以外
+	;���ڈȍ~
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
+		;����ȊO
 		ELSE
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;テンダーキス
-		IF CHECK_COM("テンダーキス")
-		;恋慕
-		ELSEIF TALENT:恋慕
-		;それ以外
+		;�e���_�[�L�X
+		IF CHECK_COM("�e���_�[�L�X")
+		;����
+		ELSEIF TALENT:����
+		;����ȊO
 		ELSE
 		ENDIF
 	ENDIF
 ENDIF
-;7アソコ愛撫
+;7�A�\�R����
 IF SELECTCOM == 7
-;1p0膣弄り 1p1恥丘ふにふに 1p2クリくり
-	;パンツずらしフラグ　パンツ越し愛撫は考えずに初回でずらす
-	SIF CHECK_CLO("Ｖ露出") == 0
-		CALL SETFLAG, "ボトムを露出：テキスト無し", TARGET
-	;初めて
+;1p0�S�M�� 1p1�p�u�ӂɂӂ� 1p2�N������
+	;�p���c���炵�t���O�@�p���c�z�������͍l�����ɏ���ł��炷
+	SIF CHECK_CLO("�u�I�o") == 0
+		CALL SETFLAG, "�{�g����I�o�F�e�L�X�g����", TARGET
+	;���߂�
 	IF FIRSTCOM(SELECTCOM) == 0
-		PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の股間に手を滑り込ませ、性器の形を確かめるように撫でまわした
-		PRINTFORMW ツルツルで肌触りがよく、ぷにぷにで気持ちが良い触感だ…
+		PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̌ҊԂɎ�����荞�܂��A����̌`���m���߂�悤�ɕ��ł܂킵��
+		PRINTFORMW �c���c���Ŕ��G�肪�悭�A�ՂɂՂɂŋC�������ǂ��G�����c
 		PRINTL
-		PRINTFORMW 「あ…や、やだ…う、うぅ……」
+		PRINTFORMW �u���c��A�₾�c���A�����c�c�v
 		PRINTL
-		PRINTFORMW 恥ずかしさからか%CALLNAME:TARGET%は性器を触られている腕をギュっと掴み、足を閉じて抵抗していたが
-		PRINTFORMW %CALLNAME:MASTER%は気に留めずに触り続けると、次第に触感はヌルヌルへ変化していき
-		PRINTFORMW 新たなコリコリな触感も見つけ、気の赴くままに触り心地を楽しんだ…
+		PRINTFORMW �p�����������炩%CALLNAME:TARGET%�͐����G���Ă���r���M�����ƒ͂݁A������Ē�R���Ă�����
+		PRINTFORMW %CALLNAME:MASTER%�͋C�ɗ��߂��ɐG�葱����ƁA����ɐG���̓k���k���֕ω����Ă���
+		PRINTFORMW �V���ȃR���R���ȐG���������A�C�̕����܂܂ɐG��S�n���y���񂾁c
 		PRINTL
-		CALL PRINT_STR, @"「あっ…あっ_BHH_  %CNAME("二人称", "どもり")%…ぅ、あ、あぁっ_BHH_」_W"
+		CALL PRINT_STR, @"�u�����c����_BHH_  %CNAME("��l��", "�ǂ���")%�c���A���A������_BHH_�v_W"
 		PRINTL
-		PRINTFORMW もはや%CALLNAME:TARGET%は抵抗というより、縋るように%CALLNAME:MASTER%の腕を抱きしめている…
-		TEQUIP:アソコ愛撫 = 1p2
-		TFLAG:地の文スキップ = 1
-	;中出し後は布でふく
-	ELSEIF CHECK_COM("ふきふき")
-	TEQUIP:アソコ愛撫 = 1p0
-	;クリ責め
-	ELSEIF CHECK_COM("陰核愛撫") || CHECK_COM("陰核愛撫に変化")
-	TEQUIP:アソコ愛撫 = 1p2
-	;確率かクンニでアソコ愛撫
-	ELSEIF RAND:2 || TEQUIP:シックスナイン || PREVCOM == 1 || PREVCOM == 9
-	TEQUIP:アソコ愛撫 = 1p0
-	;その他は恥丘ふにふに
+		PRINTFORMW ���͂�%CALLNAME:TARGET%�͒�R�Ƃ������A�v��悤��%CALLNAME:MASTER%�̘r��������߂Ă���c
+		TEQUIP:�A�\�R���� = 1p2
+		TFLAG:�n�̕��X�L�b�v = 1
+	;���o����͕z�łӂ�
+	ELSEIF CHECK_COM("�ӂ��ӂ�")
+	TEQUIP:�A�\�R���� = 1p0
+	;�N���ӂ�
+	ELSEIF CHECK_COM("�A�j����") || CHECK_COM("�A�j�����ɕω�")
+	TEQUIP:�A�\�R���� = 1p2
+	;�m�����N���j�ŃA�\�R����
+	ELSEIF RAND:2 || TEQUIP:�V�b�N�X�i�C�� || PREVCOM == 1 || PREVCOM == 9
+	TEQUIP:�A�\�R���� = 1p0
+	;���̑��͒p�u�ӂɂӂ�
 	ELSE
-	TEQUIP:アソコ愛撫 = 1p1
+	TEQUIP:�A�\�R���� = 1p1
 	ENDIF
 ENDIF
-;13くぱぁさせる
+;13���ς�������
 
-;初挿入
-IF SELECTCOM >= 60 && SELECTCOM <= 69 && FIRSTCOMS("Ｖ挿入") == 0 && TCVAR:Ｖ生挿入許可 && !TEQUIP:押し倒し
-	PRINTFORMW %CALLNAME:TARGET%ぐらいの年齢だと、きっと初潮前でコンドームは必要無いだろうが
-	PRINTFORMW もしかしたら早熟で既に初潮を迎えているかもしれない…
-	PRINTFORMW %CALLNAME:TARGET%の気持ちの事もあるので、%CALLNAME:TARGET%にゴムの有無を聞いたほうがいいだろう。
+;���}��
+IF SELECTCOM >= 60 && SELECTCOM <= 69 && FIRSTCOMS("�u�}��") == 0 && TCVAR:�u���}������ && !TEQUIP:�����|��
+	PRINTFORMW %CALLNAME:TARGET%���炢�̔N��ƁA�����Ə����O�ŃR���h�[���͕K�v�������낤��
+	PRINTFORMW �����������瑁�n�Ŋ��ɏ������}���Ă��邩������Ȃ��c
+	PRINTFORMW %CALLNAME:TARGET%�̋C�����̎�������̂ŁA%CALLNAME:TARGET%�ɃS���̗L���𕷂����ق����������낤�B
 	PRINTL
-	PRINTFORMW 「え、ゴ、ゴム…ですか……？」
-	PRINTFORMW 「えっと、その…%CNAME("一人称", "どもり")%は…まだ……」
-	PRINTFORMW 「……」
+	PRINTFORMW �u���A�S�A�S���c�ł����c�c�H�v
+	PRINTFORMW �u�����ƁA���́c%CNAME("��l��", "�ǂ���")%�́c�܂��c�c�v
+	PRINTFORMW �u�c�c�v
 	PRINTL
-	PRINTFORMW %CALLNAME:TARGET%は言葉の途中で何かを思いついたようで、
-	PRINTFORMW しばらく何かを考えた後、頬を染めながら白々しく口を開いた…
+	PRINTFORMW %CALLNAME:TARGET%�͌��t�̓r���ŉ������v�������悤�ŁA
+	PRINTFORMW ���΂炭�������l������A�j����߂Ȃ��甒�X���������J�����c
 	PRINTL
-	CALL PRINT_STR, @"「あ、あの…%CNAME("二人称")%……ゴム？って…何ですか？……_BHH_」_W"
+	CALL PRINT_STR, @"�u���A���́c%CNAME("��l��")%�c�c�S���H���āc���ł����H�c�c_BHH_�v_W"
 ENDIF
 
-;キス経験0でフェラさせようとした場合
-IF (SELECTCOM == 91 || SELECTCOM == 99) && FIRSTCOM(SELECTCOM) == 0 && EXP:キス経験 == 0
-	;押し倒されている時
-	IF TEQUIP:押し倒し
-	;それ以外
+;�L�X�o��0�Ńt�F�������悤�Ƃ����ꍇ
+IF (SELECTCOM == 91 || SELECTCOM == 99) && FIRSTCOM(SELECTCOM) == 0 && EXP:�L�X�o�� == 0
+	;�����|����Ă��鎞
+	IF TEQUIP:�����|��
+	;����ȊO
 	ELSE
-		PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の眼前にペニスを突き出すと、%CALLNAME:TARGET%は戸惑いの表情を見せた…
+		PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̊�O�Ƀy�j�X��˂��o���ƁA%CALLNAME:TARGET%�͌˘f���̕\����������c
 		PRINTL
-		PRINTFORMW 「あの、%CNAME("二人称")%…%CNAME("一人称")%は普通のキスをしたことがないです……」
-		PRINTFORMW 「それでもいいんですか……？」
-		PRINTFORMW 「鈴は…%CNAME("二人称")%がいいというなら……」
+		PRINTFORMW �u���́A%CNAME("��l��")%�c%CNAME("��l��")%�͕��ʂ̃L�X���������Ƃ��Ȃ��ł��c�c�v
+		PRINTFORMW �u����ł�������ł����c�c�H�v
+		PRINTFORMW �u��́c%CNAME("��l��")%�������Ƃ����Ȃ�c�c�v
 		PRINTL
-		;あなたのファーストキスが鈴の膣口
-		IF CEVENT("膣口に初キス")
-			PRINTFORMW %CALLNAME:MASTER%は自分のファーストキスを%CALLNAME:TARGET%の膣口に捧げていたことを%CALLNAME:TARGET%に話した…
+		;���Ȃ��̃t�@�[�X�g�L�X������S��
+		IF CEVENT("�S���ɏ��L�X")
+			PRINTFORMW %CALLNAME:MASTER%�͎����̃t�@�[�X�g�L�X��%CALLNAME:TARGET%���S���ɕ����Ă������Ƃ�%CALLNAME:TARGET%�ɘb�����c
 			PRINTL
-			PRINTFORMW 「……え？」
-			PRINTFORMW 「お、%CNAME("二人称")%は…あれが初めてだったんですか……？」
-			PRINTFORMW 「……」
-			PRINTFORMW 「そ、そうなんですか……」
+			PRINTFORMW �u�c�c���H�v
+			PRINTFORMW �u���A%CNAME("��l��")%�́c���ꂪ���߂Ă�������ł����c�c�H�v
+			PRINTFORMW �u�c�c�v
+			PRINTFORMW �u���A�����Ȃ�ł����c�c�v
 			PRINTL
-			PRINTFORMW %CALLNAME:TARGET%は微妙そうな顔をしていたが、"%CALLNAME:MASTER%の初めて"を思い返したのか仄かに頬を染めると…
+			PRINTFORMW %CALLNAME:TARGET%�͔��������Ȋ�����Ă������A"%CALLNAME:MASTER%�̏��߂�"���v���Ԃ����̂������ɖj����߂�Ɓc
 			PRINTL
-			PRINTFORMW 「んっ……」
-			PRINTFORMW 「こ、これで…おあいこですね……」
+			PRINTFORMW �u����c�c�v
+			PRINTFORMW �u���A����Łc���������ł��ˁc�c�v
 			PRINTL
-			PRINTFORMW 愛おしむかのように、あなたのペニスの鈴口に優しく口付けをした…
-			CALL SET_CEVENT, "鈴口に初キス"
-		;シックスナインでお互いに性器に初キスする場合
-		ELSEIF SELECTCOM == 99 && EXP:MASTER:キス経験 == 0
-			;かきたい
-			CALL SET_CEVENT, "膣口に初キス"
-			CALL SET_CEVENT, "鈴口に初キス"
+			PRINTFORMW �������ނ��̂悤�ɁA���Ȃ��̃y�j�X�̗���ɗD�������t���������c
+			CALL SET_CEVENT, "����ɏ��L�X"
+		;�V�b�N�X�i�C���ł��݂��ɐ���ɏ��L�X����ꍇ
+		ELSEIF SELECTCOM == 99 && EXP:MASTER:�L�X�o�� == 0
+			;��������
+			CALL SET_CEVENT, "�S���ɏ��L�X"
+			CALL SET_CEVENT, "����ɏ��L�X"
 		ELSE
-			CALL PRINT_SELECT, "先に普通のキスをする/ペニスにファーストキスしてほしい"
+			CALL PRINT_SELECT, "��ɕ��ʂ̃L�X������/�y�j�X�Ƀt�@�[�X�g�L�X���Ăق���"
 			SELECTCASE RESULT
-			;普通のキス
+			;���ʂ̃L�X
 			CASE 0
-				PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の頭を撫でながら「ごめんね」と謝り、そっと肩を抱き寄せて優しくキスをした…
+				PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%�̓��𕏂łȂ���u���߂�ˁv�Ǝӂ�A�����ƌ�������񂹂ėD�����L�X�������c
 				PRINTL
-				PRINTFORMW 「%CNAME("二人称")%、ありがとうです……」
-				PRINTFORMW 「%CNAME("一人称")%は、%CNAME("二人称")%みたいなやさしい人が"はじめて"で、とってもうれしいです……」
-				;キス
+				PRINTFORMW �u%CNAME("��l��")%�A���肪�Ƃ��ł��c�c�v
+				PRINTFORMW �u%CNAME("��l��")%�́A%CNAME("��l��")%�݂����Ȃ₳�����l��"�͂��߂�"�ŁA�Ƃ��Ă����ꂵ���ł��c�c�v
+				;�L�X
 				SELECTCOM = 6
-				CALL SET_CEVENT, "ペニキスキャンセル"
-			;ちん初キス
+				CALL SET_CEVENT, "�y�j�L�X�L�����Z��"
+			;���񏉃L�X
 			CASE 1
-				PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%が嫌じゃないならしてほしいとお願いした…
+				PRINTFORMW %CALLNAME:MASTER%��%CALLNAME:TARGET%��������Ȃ��Ȃ炵�Ăق����Ƃ��肢�����c
 				PRINTL
-				PRINTFORMW 「わ、わかりました…%CNAME("二人称")%がそういうなら……」
+				PRINTFORMW �u��A�킩��܂����c%CNAME("��l��")%�����������Ȃ�c�c�v
 				PRINTL
-				PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%のペニスを見据えた後、緊張で震えながらも少しずつ%CALLNAME:MASTER%のペニスに近づいていき…
+				PRINTFORMW %CALLNAME:TARGET%��%CALLNAME:MASTER%�̃y�j�X������������A�ْ��Ők���Ȃ������������%CALLNAME:MASTER%�̃y�j�X�ɋ߂Â��Ă����c
 				PRINTL
-				PRINTFORMW 「んっ……」
+				PRINTFORMW �u����c�c�v
 				PRINTL
-				PRINTFORMW %CALLNAME:MASTER%のペニスに初めてのキスを捧げた…
-				PRINTFORMW %CALLNAME:TARGET%の頭を撫でてあげると、何も言わなくとも%CALLNAME:TARGET%はペニスを深く咥えこみ
-				PRINTFORMW %CALLNAME:MASTER%を喜ばせようと、拙い動作でペニスをしゃぶりはじめた…					
-				CALL SET_CEVENT, "鈴口に初キス"
+				PRINTFORMW %CALLNAME:MASTER%�̃y�j�X�ɏ��߂ẴL�X��������c
+				PRINTFORMW %CALLNAME:TARGET%�̓��𕏂łĂ�����ƁA��������Ȃ��Ƃ�%CALLNAME:TARGET%�̓y�j�X��[����������
+				PRINTFORMW %CALLNAME:MASTER%����΂��悤�ƁA�ق�����Ńy�j�X������Ԃ�͂��߂��c					
+				CALL SET_CEVENT, "����ɏ��L�X"
 			ENDSELECT
 		ENDIF
-		TFLAG:地の文スキップ = 1
+		TFLAG:�n�̕��X�L�b�v = 1
 	ENDIF	
 ENDIF
-;91フェラチオ
+;91�t�F���`�I
 IF SELECTCOM == 91
-	;初めて キス経験済み
+	;���߂� �L�X�o���ς�
 	IF FIRSTCOM(SELECTCOM) == 0
-		;押し倒されている時
-		IF TEQUIP:押し倒し
-		;それ以外
+		;�����|����Ă��鎞
+		IF TEQUIP:�����|��
+		;����ȊO
 		ELSE
 		ENDIF
-	;二回目以降
-	ELSEIF CHECK_COM("ペニスキス")
-		PRINTFORMW %CALLNAME:MASTER%が%TEXTR("目配せすると/お願いすると/何も言わなくても")%%CALLNAME:TARGET%は%CALLNAME:MASTER%の股間の前で跪き、%CALLNAME:MASTER%のペニスをじっと見つめた…
+	;���ڈȍ~
+	ELSEIF CHECK_COM("�y�j�X�L�X")
+		PRINTFORMW %CALLNAME:MASTER%��%TEXTR("�ڔz�������/���肢�����/��������Ȃ��Ă�")%%CALLNAME:TARGET%��%CALLNAME:MASTER%�̌ҊԂ̑O���삫�A%CALLNAME:MASTER%�̃y�j�X�������ƌ��߂��c
 		PRINTL
-		CALL PRINT_STR, @"「%CNAME("二人称")%のおちんちんさん…、%TEXTR("今日もよろしくです/いつもありがとうです/おいしそうです")%……_BHH_  んっ…」_W"
+		CALL PRINT_STR, @"�u%CNAME("��l��")%�̂����񂿂񂳂�c�A%TEXTR("��������낵���ł�/�������肪�Ƃ��ł�/�����������ł�")%�c�c_BHH_  ����c�v_W"
 		PRINTL
-		PRINTFORMW %CALLNAME:TARGET%は%TEXTR("瞳を閉じる/深呼吸する")%と、%CALLNAME:MASTER%のペニスの%TEXTR("先端/鈴口")%にそっと%TEXTR("口付けをし/唇を合わせ")%た…
-		TFLAG:地の文スキップ = 1
-		;恋慕
-		;IF TALENT:恋慕
-		;それ以外
+		PRINTFORMW %CALLNAME:TARGET%��%TEXTR("�������/�[�ċz����")%�ƁA%CALLNAME:MASTER%�̃y�j�X��%TEXTR("��[/���")%�ɂ�����%TEXTR("���t������/�O�����킹")%���c
+		TFLAG:�n�̕��X�L�b�v = 1
+		;����
+		;IF TALENT:����
+		;����ȊO
 		;ELSE
 		;ENDIF
-	;みんな大好きお掃除フェラ
-	ELSEIF CHECK_COM("お掃除フェラ")
-		;恋慕
-		IF TALENT:恋慕
-		;それ以外
+	;�݂�ȑ�D�����|���t�F��
+	ELSEIF CHECK_COM("���|���t�F��")
+		;����
+		IF TALENT:����
+		;����ȊO
 		ELSE
 		ENDIF
-	;押し倒されているとき
-	ELSEIF TEQUIP:押し倒し
-		;恋慕
-		IF TALENT:恋慕
-		;それ以外
+	;�����|����Ă���Ƃ�
+	ELSEIF TEQUIP:�����|��
+		;����
+		IF TALENT:����
+		;����ȊO
 		ELSE
 		ENDIF
-	;それ以外
+	;����ȊO
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
-		;それ以外
+		;����
+		IF TALENT:����
+		;����ȊO
 		ELSE
 		ENDIF
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;調教コマンド終了時に行う共通処理。特になくともよい
+;�����R�}���h�I�����ɍs�����ʏ����B���ɂȂ��Ƃ��悢
 ;-------------------------------------------------
 @KOJO_ENDCOM_K33, ARG
 SIF ARG == 0
 	ARG = TARGET
-;ゴム交渉リセットを押してた場合の上書き処理
-;押してすぐの場合はどうにもできないがやる人はいないでしょ
-SIF TALENT:処女 || TALENT:恋慕 == 0
-	CALL SETFLAG, "Ｖ生挿入許可"
+;�S�������Z�b�g�������Ă��ꍇ�̏㏑������
+;�����Ă����̏ꍇ�͂ǂ��ɂ��ł��Ȃ������l�͂��Ȃ��ł���
+SIF TALENT:���� || TALENT:���� == 0
+	CALL SETFLAG, "�u���}������"
 ;
-IF CEVENT("ペニキスキャンセル")
-STR:前回コマンド = キスする
-CALL DEL_CEVENT, "ペニキスキャンセル"
+IF CEVENT("�y�j�L�X�L�����Z��")
+STR:�O��R�}���h = �L�X����
+CALL DEL_CEVENT, "�y�j�L�X�L�����Z��"
 ENDIF
 ;-------------------------------------------------
-;パラメータ変動をトリガーにした口上
-;パラメータ変動後に口上を発動します
+;�p�����[�^�ϓ����g���K�[�ɂ�������
+;�p�����[�^�ϓ���Ɍ���𔭓����܂�
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_K33, ARGS
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;���肪�����������Ɍ�����X�L�b�v����i�D�݂ɉ����Ďg���A�s����;�������ƃX�L�b�v����悤�ɂȂ�j
 ;SIF ASSIPLAY
 ;	RETURN 0
 ;-------------------------------------------------
-;パラメータ変動時のセリフ
+;�p�����[�^�ϓ����̃Z���t
 ;-------------------------------------------------
 SELECTCASE ARGS
 ;-------------------------------------------------
-;初めてＶ潤がLV3超えた
+;���߂Ău����LV3������
 ;-------------------------------------------------
-CASE "Ｖ潤LV3突破"
-	;初めて
-	IF FIRST_EV("Ｖ潤LV3突破") == 0
-		;ローションを使った場合
+CASE "�u��LV3�˔j"
+	;���߂�
+	IF FIRST_EV("�u��LV3�˔j") == 0
+		;���[�V�������g�����ꍇ
 		IF SELECTCOM == 260
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;初めて欲情がLV3超えた
+;���߂ė~�LV3������
 ;-------------------------------------------------
-CASE "欲情LV3突破"
-	IF FIRST_EV("欲情LV3突破") == 0
-		;媚薬を使った場合
+CASE "�~��LV3�˔j"
+	IF FIRST_EV("�~��LV3�˔j") == 0
+		;�Z����g�����ꍇ
 		IF SELECTCOM == 261
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;初めて恥情がLV3超えた
+;���߂Ēp�LV3������
 ;-------------------------------------------------
-CASE "恥情LV3突破"
-	IF FIRST_EV("恥情LV3突破") == 0
+CASE "�p��LV3�˔j"
+	IF FIRST_EV("�p��LV3�˔j") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;初めて恐怖がLV3超えた
+;���߂ċ��|��LV3������
 ;-------------------------------------------------
-CASE "恐怖LV3突破"
-	IF FIRST_EV("恐怖LV3突破") == 0
+CASE "���|LV3�˔j"
+	IF FIRST_EV("���|LV3�˔j") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;初めてC絶頂
+;���߂�C�Ⓒ
 ;-------------------------------------------------
-CASE "Ｃ絶頂"
-	IF FIRST_EV("Ｃ絶頂") == 0
+CASE "�b�Ⓒ"
+	IF FIRST_EV("�b�Ⓒ") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;初めてV絶頂
+;���߂�V�Ⓒ
 ;-------------------------------------------------
-CASE "Ｖ絶頂"
-	IF FIRST_EV("Ｖ絶頂") == 0
+CASE "�u�Ⓒ"
+	IF FIRST_EV("�u�Ⓒ") == 0
 		PRINTFORMW 
-		;初膣イキしたことによりＶ性向が発覚
-		TALENT:Ｖ性向 = 1
-		;PRINTFORMW ＜%CALLNAME:TARGET%は[Ｖ性向]を得た＞
+		;���S�C�L�������Ƃɂ��u���������o
+		TALENT:�u���� = 1
+		;PRINTFORMW ��%CALLNAME:TARGET%��[�u����]�𓾂���
 	ENDIF
 ;-------------------------------------------------
-;初めてA絶頂
+;���߂�A�Ⓒ
 ;-------------------------------------------------
-CASE "Ａ絶頂"
-	IF FIRST_EV("Ａ絶頂") == 0
-		PRINTFORMW 
-	ENDIF
-;-------------------------------------------------
-;初めてB絶頂
-;-------------------------------------------------
-CASE "Ｂ絶頂"
-	IF FIRST_EV("Ｂ絶頂") == 0
+CASE "�`�Ⓒ"
+	IF FIRST_EV("�`�Ⓒ") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;C焦らし
+;���߂�B�Ⓒ
 ;-------------------------------------------------
-CASE "Ｃ焦らし"
-	;初めて
-	IF FIRST_EV("Ｃ焦らし") == 0
+CASE "�a�Ⓒ"
+	IF FIRST_EV("�a�Ⓒ") == 0
 		PRINTFORMW 
-	;２回目以降
+	ENDIF
+;-------------------------------------------------
+;C�ł炵
+;-------------------------------------------------
+CASE "�b�ł炵"
+	;���߂�
+	IF FIRST_EV("�b�ł炵") == 0
+		PRINTFORMW 
+	;�Q��ڈȍ~
 	ELSE
-		;強絶頂Ｃ焦らし
-		IF NOWEX:Ｃ寸止め >= 2
+		;���Ⓒ�b�ł炵
+		IF NOWEX:�b���~�� >= 2
 			PRINTFORMW 
-		;絶頂Ｃ焦らし
-		ELSEIF NOWEX:Ｃ寸止め
+		;�Ⓒ�b�ł炵
+		ELSEIF NOWEX:�b���~��
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;V焦らし
+;V�ł炵
 ;-------------------------------------------------
-CASE "Ｖ焦らし"
-	;初めて
-	IF FIRST_EV("Ｖ焦らし") == 0
+CASE "�u�ł炵"
+	;���߂�
+	IF FIRST_EV("�u�ł炵") == 0
 		PRINTFORMW 
-	;２回目以降
+	;�Q��ڈȍ~
 	ELSE
-		;強絶頂Ｖ焦らし
-		IF NOWEX:Ｖ寸止め >= 2
+		;���Ⓒ�u�ł炵
+		IF NOWEX:�u���~�� >= 2
 			PRINTFORMW 
-		;絶頂Ｖ焦らし
-		ELSEIF NOWEX:Ｖ寸止め
+		;�Ⓒ�u�ł炵
+		ELSEIF NOWEX:�u���~��
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;A焦らし
+;A�ł炵
 ;-------------------------------------------------
-CASE "Ａ焦らし"
-	;初めて
-	IF FIRST_EV("Ａ焦らし") == 0
+CASE "�`�ł炵"
+	;���߂�
+	IF FIRST_EV("�`�ł炵") == 0
 		PRINTFORMW 
-	;２回目以降
+	;�Q��ڈȍ~
 	ELSE
-		;強絶頂Ａ焦らし
-		IF NOWEX:Ａ寸止め >= 2
+		;���Ⓒ�`�ł炵
+		IF NOWEX:�`���~�� >= 2
 			PRINTFORMW 
-		;絶頂Ａ焦らし
-		ELSEIF NOWEX:Ａ寸止め
+		;�Ⓒ�`�ł炵
+		ELSEIF NOWEX:�`���~��
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;B焦らし
+;B�ł炵
 ;-------------------------------------------------
-CASE "Ｂ焦らし"
-	;初めて
-	IF FIRST_EV("Ｂ焦らし") == 0
+CASE "�a�ł炵"
+	;���߂�
+	IF FIRST_EV("�a�ł炵") == 0
 		PRINTFORMW 
-	;２回目以降
+	;�Q��ڈȍ~
 	ELSE
-		;強絶頂Ｂ焦らし
-		IF NOWEX:Ｂ寸止め >= 2
+		;���Ⓒ�a�ł炵
+		IF NOWEX:�a���~�� >= 2
 			PRINTFORMW 
-		;絶頂Ｂ焦らし
-		ELSEIF NOWEX:Ｂ寸止め
+		;�Ⓒ�a�ł炵
+		ELSEIF NOWEX:�a���~��
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;ふたなり射精焦らし
+;�ӂ��Ȃ�ː��ł炵
 ;-------------------------------------------------
-CASE "射精焦らし"
-	;初めて
-	IF FIRST_EV("射精焦らし") == 0
+CASE "�ː��ł炵"
+	;���߂�
+	IF FIRST_EV("�ː��ł炵") == 0
 		PRINTFORMW 
-	;２回目以降
+	;�Q��ڈȍ~
 	ELSE
-		;大量射精焦らし
-		IF NOWEX:射精寸止め >= 2
+		;��ʎː��ł炵
+		IF NOWEX:�ː����~�� >= 2
 			PRINTFORMW 
-		;射精焦らし
-		ELSEIF NOWEX:射精寸止め
+		;�ː��ł炵
+		ELSEIF NOWEX:�ː����~��
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;処女喪失(処女のみ)
+;�����r��(�����̂�)
 ;-------------------------------------------------
-CASE "処女喪失"
-	IF FIRST_EV("処女喪失") == 0
-		;恋慕
-		IF TALENT:恋慕
-			;主人のセックスによる処女喪失
-			IF PLAYER == MASTER && INSERT("Ｖインサート")
+CASE "�����r��"
+	IF FIRST_EV("�����r��") == 0
+		;����
+		IF TALENT:����
+			;��l�̃Z�b�N�X�ɂ�鏈���r��
+			IF PLAYER == MASTER && INSERT("�u�C���T�[�g")
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW 
 			ENDIF
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;射精した(ふたなり/オトコのみ)
+;�ː�����(�ӂ��Ȃ�/�I�g�R�̂�)
 ;-------------------------------------------------
-CASE "射精した"
-	;初めて
-	IF FIRST_EV("射精した") == 0
-		;恋慕
-		IF TALENT:恋慕
+CASE "�ː�����"
+	;���߂�
+	IF FIRST_EV("�ː�����") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;噴乳した(母乳体質のみ)
+;��������(����̎��̂�)
 ;-------------------------------------------------
-CASE "噴乳した"
-	;初めて
-	IF FIRST_EV("噴乳した") == 0
+CASE "��������"
+	;���߂�
+	IF FIRST_EV("��������") == 0
 		PRINTFORMW 
-	;二回目以降
+	;���ڈȍ~
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;絶頂放尿した
+;�Ⓒ���A����
 ;-------------------------------------------------
-CASE "絶頂放尿"
-	;初めて
-	IF FIRST_EV("絶頂放尿") == 0
-		;抵抗なし
-		IF CHECK_COM("強制放尿") == 0
+CASE "�Ⓒ���A"
+	;���߂�
+	IF FIRST_EV("�Ⓒ���A") == 0
+		;��R�Ȃ�
+		IF CHECK_COM("�������A") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;抵抗なし
-		IF CHECK_COM("強制放尿") == 0
+		;��R�Ȃ�
+		IF CHECK_COM("�������A") == 0
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;Ｃ絶頂20以上
+;�b�Ⓒ20�ȏ�
 ;-------------------------------------------------
-CASE "Ｃ絶頂20回以上"
-	;初めて
-	IF FIRST_EV("Ｃ絶頂20回以上") == 0
-		;恋慕
-		IF TALENT:恋慕
+CASE "�b�Ⓒ20��ȏ�"
+	;���߂�
+	IF FIRST_EV("�b�Ⓒ20��ȏ�") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;Ｖ絶頂20以上
+;�u�Ⓒ20�ȏ�
 ;-------------------------------------------------
-CASE "Ｖ絶頂20回以上"
-	;初めて
-	IF FIRST_EV("Ｖ絶頂20回以上") == 0
-		;恋慕
-		IF TALENT:恋慕
+CASE "�u�Ⓒ20��ȏ�"
+	;���߂�
+	IF FIRST_EV("�u�Ⓒ20��ȏ�") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;Ａ絶頂20以上
+;�`�Ⓒ20�ȏ�
 ;-------------------------------------------------
-CASE "Ａ絶頂20回以上"
-	;初めて
-	IF FIRST_EV("Ａ絶頂20回以上") == 0
-		;恋慕
-		IF TALENT:恋慕
+CASE "�`�Ⓒ20��ȏ�"
+	;���߂�
+	IF FIRST_EV("�`�Ⓒ20��ȏ�") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;Ｂ絶頂20以上
+;�a�Ⓒ20�ȏ�
 ;-------------------------------------------------
-CASE "Ｂ絶頂20回以上"
-	;初めて
-	IF FIRST_EV("Ｂ絶頂20回以上") == 0
-		;恋慕
-		IF TALENT:恋慕
+CASE "�a�Ⓒ20��ȏ�"
+	;���߂�
+	IF FIRST_EV("�a�Ⓒ20��ȏ�") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -4186,257 +4186,257 @@ CASE "Ｂ絶頂20回以上"
 ENDSELECT
 
 ;-------------------------------------------------
-;刻印変動をトリガーにした口上
-;刻印変動後に口上を発動します
+;����ϓ����g���K�[�ɂ�������
+;����ϓ���Ɍ���𔭓����܂�
 ;-------------------------------------------------
 @KOJO_MESSAGE_MARKCNG_K33, ARGS
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;���肪�����������Ɍ�����X�L�b�v����i�D�݂ɉ����Ďg���A�s����;�������ƃX�L�b�v����悤�ɂȂ�j
 ;SIF ASSIPLAY
 ;	RETURN 0
 
 SELECTCASE ARGS
 ;-------------------------------------------------
-;苦痛刻印Lv3取得
+;��ɍ���Lv3�擾
 ;-------------------------------------------------
-CASE "苦痛刻印Lv3取得"
-	IF FIRST_EV("苦痛刻印Lv3取得") == 0
+CASE "��ɍ���Lv3�擾"
+	IF FIRST_EV("��ɍ���Lv3�擾") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;快楽刻印Lv3取得
+;���y����Lv3�擾
 ;-------------------------------------------------
-CASE "快楽刻印Lv3取得"
-	IF FIRST_EV("快楽刻印Lv3取得") == 0
+CASE "���y����Lv3�擾"
+	IF FIRST_EV("���y����Lv3�擾") == 0
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;屈服刻印Lv3取得
+;��������Lv3�擾
 ;-------------------------------------------------
-CASE "屈服刻印Lv3取得"
-	IF FIRST_EV("屈服刻印Lv3取得") == 0
+CASE "��������Lv3�擾"
+	IF FIRST_EV("��������Lv3�擾") == 0
 		PRINTFORMW 
 	ENDIF
 ENDSELECT
 
 
 ;-------------------------------------------------
-;射精先選択時に表示する口上
-;頻繁に表示されるためランダムや表示条件の設定推奨です
+;�ː���I�����ɕ\���������
+;�p�ɂɕ\������邽�߃����_����\�������̐ݒ萄���ł�
 ;-------------------------------------------------
 @KOJO_MESSAGE_SHOOT_K33
-;初期は表示されないようにしてあるため、書いた後はRETURN 0を消す
+;�����͕\������Ȃ��悤�ɂ��Ă��邽�߁A���������RETURN 0������
 RETURN 0
 
-;恋慕
-IF TALENT:恋慕
+;����
+IF TALENT:����
 	PRINTFORMW 
-;それ以外
+;����ȊO
 ELSE
 	PRINTFORMW 
 ENDIF
 
 ;-------------------------------------------------
-;PLAYERの射精＆絶頂をトリガーにした口上
-;それぞれの射精分岐内での初めてかどうかの判定は、FIRST_EV(ARGS)で行う
-;例）ELSEIF SHOOT("脚")において初めてかどうかは、FIRST_EV("絶頂：脚")で判定する
+;PLAYER�̎ː����Ⓒ���g���K�[�ɂ�������
+;���ꂼ��̎ː�������ł̏��߂Ă��ǂ����̔���́AFIRST_EV(ARGS)�ōs��
+;��jELSEIF SHOOT("�r")�ɂ����ď��߂Ă��ǂ����́AFIRST_EV("�Ⓒ�F�r")�Ŕ��肷��
 ;-------------------------------------------------
 @KOJO_MESSAGE_SAMEN_AND_EXTACY_K33
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;���肪�����������Ɍ�����X�L�b�v����i�D�݂ɉ����Ďg���A�s����;�������ƃX�L�b�v����悤�ɂȂ�j
 ;SIF ASSIPLAY
 ;	RETURN 0
 
 ;-------------------------------------------------
-;髪、顔、股間、腹、尻、くぱぁ、Ａくぱぁへのぶっかけ
+;���A��A�ҊԁA���A�K�A���ς��A�`���ς��ւ̂Ԃ�����
 ;-------------------------------------------------
-IF SHOOT("ぶっかけ")
-	IF SHOOT("自慰する")
+IF SHOOT("�Ԃ�����")
+	IF SHOOT("���Ԃ���")
 		PRINTFORMW 
-	;超大量射精
-	ELSEIF COND("絶頂", PLAYER) >= 3
+	;����ʎː�
+	ELSEIF COND("�Ⓒ", PLAYER) >= 3
 		PRINTFORMW 
-	;大量射精
-	ELSEIF COND("絶頂", PLAYER) == 2
+	;��ʎː�
+	ELSEIF COND("�Ⓒ", PLAYER) == 2
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;自慰で射精された(ぶっかけではなく床などに射精した)
+;���ԂŎː����ꂽ(�Ԃ������ł͂Ȃ����ȂǂɎː�����)
 ;-------------------------------------------------
-ELSEIF SHOOT("自慰する")
+ELSEIF SHOOT("���Ԃ���")
 	PRINTFORMW 
 
-;以下は通常の射精区分。
+;�ȉ��͒ʏ�̎ː��敪�B
 ;-------------------------------------------------
-;素股、足コキや身体で射精させた
+;�f�ҁA���R�L��g�̂Ŏː�������
 ;-------------------------------------------------
-ELSEIF SHOOT("脚")
-	;初めて
-	IF FIRST_EV("絶頂：脚") == 0
-		;恋慕
-		IF TALENT:恋慕
+ELSEIF SHOOT("�r")
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F�r") == 0
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;二回目以降
+	;���ڈȍ~
 	ELSE
-		;恋慕
-		IF TALENT:恋慕
+		;����
+		IF TALENT:����
 			PRINTFORMW 
-		;それ以外
+		;����ȊO
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
-ELSEIF SHOOT("素股")
+ELSEIF SHOOT("�f��")
 	PRINTFORMW 
 ;-------------------------------------------------
-;口で射精させた
+;���Ŏː�������
 ;-------------------------------------------------
-ELSEIF SHOOT("口")
-	;初めて
-	IF FIRST_EV("絶頂：口") == 0
+ELSEIF SHOOT("��")
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F��") == 0
 		PRINTFORMW 
-	;精液中毒Lv5
-	ELSEIF ABL:精液中毒 >= 5
+	;���t����Lv5
+	ELSEIF ABL:���t���� >= 5
 		PRINTFORMW 
-	;精液中毒Lv3
-	ELSEIF ABL:精液中毒 >= 3
+	;���t����Lv3
+	ELSEIF ABL:���t���� >= 3
 		PRINTFORMW 
-	;奉仕精神Lv3以上
-	ELSEIF ABL:奉仕精神 >= 3
+	;��d���_Lv3�ȏ�
+	ELSEIF ABL:��d���_ >= 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;胸で射精させた
+;���Ŏː�������
 ;-------------------------------------------------
-ELSEIF SHOOT("胸")
-	;初めて
-	IF FIRST_EV("絶頂：胸") == 0
+ELSEIF SHOOT("��")
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F��") == 0
 		PRINTFORMW 
-	;奉仕精神Lv5
-	ELSEIF ABL:奉仕精神 >= 5
+	;��d���_Lv5
+	ELSEIF ABL:��d���_ >= 5
 		PRINTFORMW 
-	;奉仕精神Lv3以上
-	ELSEIF ABL:奉仕精神 >= 3
+	;��d���_Lv3�ȏ�
+	ELSEIF ABL:��d���_ >= 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;手で射精させた
+;��Ŏː�������
 ;-------------------------------------------------
-ELSEIF SHOOT("手")
-	;初めて
-	IF FIRST_EV("絶頂：手") == 0
+ELSEIF SHOOT("��")
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F��") == 0
 		PRINTFORMW 
-	;奉仕精神Lv5
-	ELSEIF ABL:奉仕精神 >= 5
+	;��d���_Lv5
+	ELSEIF ABL:��d���_ >= 5
 		PRINTFORMW 
-	;奉仕精神Lv3
-	ELSEIF ABL:奉仕精神 >= 3
+	;��d���_Lv3
+	ELSEIF ABL:��d���_ >= 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;セックスで射精させた
+;�Z�b�N�X�Ŏː�������
 ;-------------------------------------------------
-ELSEIF SHOOT("Ｖ中出し")
-;PRINTFORMW どぴゅ
-TFLAG:地の文スキップ = 1
-	;初めて
-	IF FIRST_EV("絶頂：Ｖ中出し") == 0
+ELSEIF SHOOT("�u���o��")
+;PRINTFORMW �ǂ҂�
+TFLAG:�n�̕��X�L�b�v = 1
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F�u���o��") == 0
 		PRINTFORMW 
-		;初中出ししたことにより膣内射精に弱いが発覚
-		SETBIT TALENT:精液に弱い, 1
-		;PRINTFORMW ＜%CALLNAME:TARGET%は[膣内射精に弱い]を得た＞
-	;恋慕
-	ELSEIF TALENT:恋慕
+		;�����o���������Ƃɂ���S���ː��Ɏア�����o
+		SETBIT TALENT:���t�Ɏア, 1
+		;PRINTFORMW ��%CALLNAME:TARGET%��[�S���ː��Ɏア]�𓾂���
+	;����
+	ELSEIF TALENT:����
 		PRINTFORMW 
-	;屈服刻印Lv3
-	ELSEIF MARK:屈服刻印 == 3
+	;��������Lv3
+	ELSEIF MARK:�������� == 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
-ELSEIF SHOOT("Ａ中出し")
-	;初めて
-	IF FIRST_EV("絶頂：Ａ中出し") == 0
+ELSEIF SHOOT("�`���o��")
+	;���߂�
+	IF FIRST_EV("�Ⓒ�F�`���o��") == 0
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		PRINTFORMW 
-	;屈服刻印Lv3
-	ELSEIF MARK:屈服刻印 == 3
+	;��������Lv3
+	ELSEIF MARK:�������� == 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;キスで射精
+;�L�X�Ŏː�
 ;-------------------------------------------------
-ELSEIF SHOOT("キス")
+ELSEIF SHOOT("�L�X")
 	PRINTFORMW 
 ;-------------------------------------------------
-;顔面騎乗で射精
+;��ʋR��Ŏː�
 ;-------------------------------------------------
-ELSEIF SHOOT("顔面騎乗")
+ELSEIF SHOOT("��ʋR��")
 	PRINTFORMW 
 ;-------------------------------------------------
-;ぱふぱふで射精
+;�ςӂςӂŎː�
 ;-------------------------------------------------
-ELSEIF SHOOT("ぱふぱふ")
+ELSEIF SHOOT("�ςӂς�")
 	PRINTFORMW 
 ;-------------------------------------------------
-;逆クンニで射精
+;�t�N���j�Ŏː�
 ;-------------------------------------------------
-ELSEIF SHOOT("逆クンニ")
+ELSEIF SHOOT("�t�N���j")
 	PRINTFORMW 
 ;-------------------------------------------------
-;逆アナル、逆レイプで射精
+;�t�A�i���A�t���C�v�Ŏː�
 ;-------------------------------------------------
-ELSEIF SHOOT("逆レイプ") || SHOOT("逆アナル") || SHOOT("アナル奉仕")
+ELSEIF SHOOT("�t���C�v") || SHOOT("�t�A�i��") || SHOOT("�A�i����d")
 	PRINTFORMW 
 ;-------------------------------------------------
-;PLAYERが女で、イってしまった…
+;PLAYER�����ŁA�C���Ă��܂����c
 ;-------------------------------------------------
-ELSEIF SHOOT("調教者がオンナ")
-	;強絶頂
-	IF COND("絶頂", PLAYER) >= 2
+ELSEIF SHOOT("�����҂��I���i")
+	;���Ⓒ
+	IF COND("�Ⓒ", PLAYER) >= 2
 		PRINTFORMW 
-	;絶頂
-	ELSEIF COND("絶頂", PLAYER) == 1
+	;�Ⓒ
+	ELSEIF COND("�Ⓒ", PLAYER) == 1
 		PRINTFORMW 
 	ENDIF
 ENDIF
 
 
 ;-------------------------------------------------
-;キャラが調教中に調教者を攻める際などの口上
+;�L�������������ɒ����҂��U�߂�ۂȂǂ̌���
 ;-------------------------------------------------
 @KOJO_COUNTER_K33, ARGS
 SELECTCASE ARGS
-CASE "恍惚"
+CASE "����"
 	PRINTFORMW 
-CASE "押し倒し"
+CASE "�����|��"
 	PRINTFORMW 
-CASE "強制終了"
+CASE "�����I��"
 	PRINTFORMW 
-CASE "リザレクション"
+CASE "���U���N�V����"
 	PRINTFORMW 
-CASE "恍惚から復帰"
+CASE "�������畜�A"
 	PRINTFORMW 
-CASE "助手が限界"
+CASE "���肪���E"
 	PRINTFORMW 
 ENDSELECT
 
@@ -4444,427 +4444,427 @@ RETURN 1
 
 
 ;-------------------------------------------------
-;イベント口上集
+;�C�x���g����W
 ;-------------------------------------------------
 @KOJO_EVENT_K33, ARGS
 SELECTCASE ARGS
 ;-------------------------------------------------
-;調教終了不可能
+;�����I���s�\
 ;-------------------------------------------------
-CASE "調教終了不可能"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�����I���s�\"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;コンドーム装着
+;�R���h�[������
 ;-------------------------------------------------
-CASE "Ｖコンドーム装着"
-	;挿入コマンド
-	IF TRAIN_GENRE("挿入", SELECTCOM)
-		;プレイヤーは着ける気満々
-		IF TEQUIP:PLAYER:コンドーム
+CASE "�u�R���h�[������"
+	;�}���R�}���h
+	IF TRAIN_GENRE("�}��", SELECTCOM)
+		;�v���C���[�͒�����C���X
+		IF TEQUIP:PLAYER:�R���h�[��
 
-		;ゴムが無い
-		ELSEIF ITEM:コンドーム == 0
+		;�S��������
+		ELSEIF ITEM:�R���h�[�� == 0
 
-		;安全日に生希望
-		ELSEIF COND("安全日")
+		;���S���ɐ���]
+		ELSEIF COND("���S��")
 
-		;安全日じゃないけどゴム無しを希望
+		;���S������Ȃ����ǃS����������]
 		ELSE
 
 		ENDIF
-	;プレイヤーへの挿入コマンド
-	ELSEIF TRAIN_GENRE("逆挿入", SELECTCOM)
-		;プレイヤーは着けてもらうの希望
-		IF TEQUIP:コンドーム
+	;�v���C���[�ւ̑}���R�}���h
+	ELSEIF TRAIN_GENRE("�t�}��", SELECTCOM)
+		;�v���C���[�͒����Ă��炤�̊�]
+		IF TEQUIP:�R���h�[��
 
-		;ゴムが無い
-		ELSEIF ITEM:コンドーム == 0
+		;�S��������
+		ELSEIF ITEM:�R���h�[�� == 0
 
-		;安全日に生希望
-		ELSEIF COND("安全日", PLAYER)
+		;���S���ɐ���]
+		ELSEIF COND("���S��", PLAYER)
 
-		;安全日じゃないけどゴム無しを希望
+		;���S������Ȃ����ǃS����������]
 		ELSE
 
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;陶酔かつ危険日でない時に、普段は許していない生挿入をさせてあげる際のセリフ
+;�������댯���łȂ����ɁA���i�͋����Ă��Ȃ����}���������Ă�����ۂ̃Z���t
 ;-------------------------------------------------
-CASE "特別に生挿入許可"
-	;初めて
+CASE "���ʂɐ��}������"
+	;���߂�
 	IF FIRST_EV(ARGS) == 0
 
 	ELSE
 
 	ENDIF
 ;-------------------------------------------------
-;調教後自慰
+;�����㎩��
 ;-------------------------------------------------
-CASE "調教後自慰"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�����㎩��"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
-	;自慰中毒Lv3以上
-	ELSEIF ABL:自慰中毒 >= 3
+	;���Ԓ���Lv3�ȏ�
+	ELSEIF ABL:���Ԓ��� >= 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;レズプレイ
+;���Y�v���C
 ;-------------------------------------------------
-CASE "調教後レズプレイ"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�����ヌ�Y�v���C"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;調教後セックス
+;������Z�b�N�X
 ;-------------------------------------------------
-CASE "調教後セックス"
-	;V感覚Lv4以上
-	IF ABL:Ｖ感覚 >= 4
+CASE "������Z�b�N�X"
+	;V���oLv4�ȏ�
+	IF ABL:�u���o >= 4
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;夜這い騎乗位
+;�锇���R���
 ;-------------------------------------------------
-CASE "夜這い騎乗位"
-	;V感覚Lv5以上
-	IF ABL:Ｖ感覚 >= 5
+CASE "�锇���R���"
+	;V���oLv5�ȏ�
+	IF ABL:�u���o >= 5
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;夜這いＡ騎乗位
+;�锇���`�R���
 ;-------------------------------------------------
-CASE "夜這いＡ騎乗位"
-	;Ａ感覚Lv5以上
-	IF ABL:Ａ感覚 >= 5
+CASE "�锇���`�R���"
+	;�`���oLv5�ȏ�
+	IF ABL:�`���o >= 5
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-----------------------------
-;夜這いキス
+;�锇���L�X
 ;----------------------------
-CASE "夜這いキス"
-	;M感覚Lv3以上
-	IF ABL:Ｍ感覚 >= 3
+CASE "�锇���L�X"
+	;M���oLv3�ȏ�
+	IF ABL:�l���o >= 3
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;添い寝
+;�Y���Q
 ;-------------------------------------------------
-CASE "添い寝"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�Y���Q"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
-	;それ以外
+	;����ȊO
 	ELSE
 		PRINTFORMW 
 	ENDIF
 
 ;-------------------------------------------------
-;PLAYERがMASTERとASSI間で交代した際の台詞
+;PLAYER��MASTER��ASSI�ԂŌ�サ���ۂ̑䎌
 ;-------------------------------------------------
-CASE "調教者交代"
-	;PLAYERがASSIに変わった
+CASE "�����Ҍ��"
+	;PLAYER��ASSI�ɕς����
 	IF PLAYER == ASSI
 		PRINTFORMW 
-	;PLAYERがあなたに戻った
+	;PLAYER�����Ȃ��ɖ߂���
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;パートナーがTARGETとASSI間で交代した際の台詞
+;�p�[�g�i�[��TARGET��ASSI�ԂŌ�サ���ۂ̑䎌
 ;-------------------------------------------------
-CASE "対象交代"
-	;パートナーとしてエッチに誘われた
-	IF COND("第一対象") == TARGET
+CASE "�Ώی��"
+	;�p�[�g�i�[�Ƃ��ăG�b�`�ɗU��ꂽ
+	IF COND("���Ώ�") == TARGET
 		PRINTFORMW 
-	;アドバイザーとしてエッチに誘われた
+	;�A�h�o�C�U�[�Ƃ��ăG�b�`�ɗU��ꂽ
 	ELSE
 		PRINTFORMW 
 	ENDIF
 
 ;-------------------------------------------------
-;お掃除フェラ
+;���|���t�F��
 ;-------------------------------------------------
-CASE "お掃除フェラ"
-	SELECTCASE TFLAG:口上分岐
-	;お掃除前
+CASE "���|���t�F��"
+	SELECTCASE TFLAG:���㕪��
+	;���|���O
 	CASE 0
 		PRINTFORMW 
-	;お掃除中
+	;���|����
 	CASE 1
 		PRINTFORMW 
-	;お掃除で射精しなかった
+	;���|���Ŏː����Ȃ�����
 	CASE 2
 		PRINTFORMW 
-	;お掃除で射精しそう？
+	;���|���Ŏː��������H
 	CASE 3
 		PRINTFORMW 
-	;射精した
+	;�ː�����
 	CASE 4
 		PRINTFORMW 
-	;お掃除で射精後
+	;���|���Ŏː���
 	CASE 5
 		PRINTFORMW 
 	ENDSELECT
 ;-------------------------------------------------
-;脱衣
+;�E��
 ;-------------------------------------------------
-CASE "自発脱ぎ"
-	;ハダカになった
-	IF CHECK_CLO("ハダカ")
-		IF TALENT:恋慕
+CASE "�����E��"
+	;�n�_�J�ɂȂ���
+	IF CHECK_CLO("�n�_�J")
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;アソコ剥きだし
-	ELSEIF CHECK_CLO("Ｖ露出")
-		IF TALENT:恋慕
+	;�A�\�R��������
+	ELSEIF CHECK_CLO("�u�I�o")
+		IF TALENT:����
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;部分脱ぎ
+	;�����E��
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;妊娠した
+;�D�P����
 ;----------------------------------------------------------------
-CASE "妊娠発覚"
-	;出産経験
-	IF TALENT:出産経験
+CASE "�D�P���o"
+	;�o�Y�o��
+	IF TALENT:�o�Y�o��
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
-		PRINTFORMW 
-	ELSE
-		PRINTFORMW 
-	ENDIF
-;----------------------------------------------------------------
-;出産した
-;----------------------------------------------------------------
-CASE "出産"
-	;出産経験
-	IF TALENT:出産経験
-		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;子供が大きくなった
+;�o�Y����
 ;----------------------------------------------------------------
-CASE "子離れ"
-	;出産経験
-	IF TALENT:出産経験
+CASE "�o�Y"
+	;�o�Y�o��
+	IF TALENT:�o�Y�o��
 		PRINTFORMW 
-	;恋慕
-	ELSEIF TALENT:恋慕
+	;����
+	ELSEIF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;セックス後に抜いた時	
+;�q�����傫���Ȃ���
 ;----------------------------------------------------------------
-;恥ずかしいところを見せてくれる
+CASE "�q����"
+	;�o�Y�o��
+	IF TALENT:�o�Y�o��
+		PRINTFORMW 
+	;����
+	ELSEIF TALENT:����
+		PRINTFORMW 
+	ELSE
+		PRINTFORMW 
+	ENDIF
 ;----------------------------------------------------------------
-CASE "中出し後くぱぁ"
-	;恋慕
-	IF TALENT:恋慕
-		;ゴム有り
-		IF TEQUIP:PLAYER:コンドーム
+;�Z�b�N�X��ɔ�������	
+;----------------------------------------------------------------
+;�p���������Ƃ���������Ă����
+;----------------------------------------------------------------
+CASE "���o���キ�ς�"
+	;����
+	IF TALENT:����
+		;�S���L��
+		IF TEQUIP:PLAYER:�R���h�[��
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ELSE
-		;ゴム有り
-		IF TEQUIP:PLAYER:コンドーム
+		;�S���L��
+		IF TEQUIP:PLAYER:�R���h�[��
 			PRINTFORMW 
 		ELSE
-			;PRINTFORMW どろり
+			;PRINTFORMW �ǂ��
 		ENDIF
 	ENDIF
 ;----------------------------------------------------------------
-;恥ずかしいところを見せてくれない
-;好感度が高いと起きないので、恋慕で分岐させる意味はない。
-;また、恥薄いならば発生しない
+;�p���������Ƃ���������Ă���Ȃ�
+;�D���x�������ƋN���Ȃ��̂ŁA����ŕ��򂳂���Ӗ��͂Ȃ��B
+;�܂��A�p�����Ȃ�Δ������Ȃ�
 ;----------------------------------------------------------------
-CASE "中出し後恥じらい"
-	;PRINTFORMW どろり
+CASE "���o����p���炢"
+	;PRINTFORMW �ǂ��
 ;----------------------------------------------------------------
-;精液を味わう
+;���t�𖡂키
 ;----------------------------------------------------------------
-CASE "中出し後精液掻き出し"
-	;恋慕
-	IF TALENT:恋慕
+CASE "���o���㐸�t�~���o��"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;気持ちよくてぐったり
+;�C�����悭�Ă�������
 ;----------------------------------------------------------------
-CASE "中出し後恍惚"
-	;恋慕
-	IF TALENT:恋慕
+CASE "���o���㜒��"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;ビデオ保存
+;�r�f�I�ۑ�
 ;-------------------------------------------------
-CASE "ビデオ保存"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�r�f�I�ۑ�"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;ビデオ売却
+;�r�f�I���p
 ;-------------------------------------------------
-CASE "ビデオ売却"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�r�f�I���p"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;-------------------------------------------------
-;ビデオ売却失敗
+;�r�f�I���p���s
 ;-------------------------------------------------
-CASE "ビデオ売却失敗"
-	;恋慕
-	IF TALENT:恋慕
+CASE "�r�f�I���p���s"
+	;����
+	IF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 
 ;----------------------------------------------------------------
-;プラグをしていない状態での液体浣腸口上
+;�v���O�����Ă��Ȃ���Ԃł̉t�̟�������
 ;----------------------------------------------------------------
-CASE "プラグ無し浣腸イベント"
-	;限界値突破時
-	IF BASE:排泄欲 >= 10000
-		;限界値を超えたが漏らせない場合
-		IF INSERT("Ａインサート") || COND("アナル栓")
+CASE "�v���O���������C�x���g"
+	;���E�l�˔j��
+	IF BASE:�r���~ >= 10000
+		;���E�l�𒴂������R�点�Ȃ��ꍇ
+		IF INSERT("�`�C���T�[�g") || COND("�A�i����")
 			PRINTFORMW 
-		;漏らす直前
+		;�R�炷���O
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;漏らした
-	ELSEIF NOWEX:排泄
+	;�R�炵��
+	ELSEIF NOWEX:�r��
 		PRINTFORMW 
-	;我慢しているときの口上
-	ELSEIF TEQUIP:浣腸
+	;�䖝���Ă���Ƃ��̌���
+	ELSEIF TEQUIP:����
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;エナジードレイン
+;�G�i�W�[�h���C��
 ;----------------------------------------------------------------
-CASE "エナジードレイン"
-	;初めて
+CASE "�G�i�W�[�h���C��"
+	;���߂�
 	IF FIRST_EV(ARGS) == 0
 		PRINTFORMW 
-	ELSEIF TALENT:恋慕
+	ELSEIF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;調教者がちんこを挿入する前に射精してしまった！
+;�����҂����񂱂�}������O�Ɏː����Ă��܂����I
 ;----------------------------------------------------------------
-CASE "挿入前暴発"
-	;初めて
+CASE "�}���O�\��"
+	;���߂�
 	IF FIRST_EV(ARGS) == 0
 		PRINTFORMW 
-	ELSEIF TALENT:恋慕
+	ELSEIF TALENT:����
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 ;----------------------------------------------------------------
-;特殊なアイテムを使った際の台詞
+;����ȃA�C�e�����g�����ۂ̑䎌
 ;----------------------------------------------------------------
-CASE "避妊の護符"
-	;初めて
+CASE "��D�̌아"
+	;���߂�
 	IF FIRST_EV(ARGS) == 0
 		PRINTFORMW 
-	ELSEIF TALENT:恋慕
-		;装着
-		IF TALENT:避妊の護符
+	ELSEIF TALENT:����
+		;����
+		IF TALENT:��D�̌아
 			PRINTFORMW 
-		;取り外し
+		;���O��
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ELSE
-		IF TALENT:避妊の護符
+		IF TALENT:��D�̌아
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
 		ENDIF
 	ENDIF
 
-CASE "ふたなり薬"
-	;ふたなりになった
-	IF TALENT:ふたなり
+CASE "�ӂ��Ȃ��"
+	;�ӂ��Ȃ�ɂȂ���
+	IF TALENT:�ӂ��Ȃ�
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
 	RETURN 1
-CASE "黒いドロップ"
-	;オトコになった
-	IF TALENT:オトコ
+CASE "�����h���b�v"
+	;�I�g�R�ɂȂ���
+	IF TALENT:�I�g�R
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 
 	ENDIF
-CASE "巨根薬"
-	;薬を使用した後の状態で分岐
-	SELECTCASE SIZE("ペニス")
-	;並
+CASE "������"
+	;����g�p������̏�Ԃŕ���
+	SELECTCASE SIZE("�y�j�X")
+	;��
 	CASE 1
 		PRINTFORMW 
-	;巨根
+	;����
 	CASE 2
 		PRINTFORMW 
-	;馬並み
+	;�n����
 	CASE 3
 		PRINTFORMW 
 	CASE 4
@@ -4874,114 +4874,114 @@ CASE "巨根薬"
 	;CASEELSE
 	;	PRINTFORMW 
 	ENDSELECT
-CASE "縮根薬"
-	;薬を使用した後の状態で分岐
-	SELECTCASE SIZE("ペニス")
-	;小
+CASE "�k����"
+	;����g�p������̏�Ԃŕ���
+	SELECTCASE SIZE("�y�j�X")
+	;��
 	CASE 0
 		PRINTFORMW 
-	;並
+	;��
 	CASE 1
 		PRINTFORMW 
-	;巨根
+	;����
 	CASE 2
 		PRINTFORMW 
 	ENDSELECT
-CASE "剥皮薬"
-	;薬を使用した後の状態で分岐
-	IF COND("仮性包茎")
+CASE "�����"
+	;����g�p������̏�Ԃŕ���
+	IF COND("������s")
 		PRINTFORMW 
-	;ずる剥け
+	;���锍��
 	ELSE
 		PRINTFORMW 
 	ENDIF
-CASE "伸皮薬"
-	;薬を使用した後の状態で分岐
-	IF COND("真性包茎")
+CASE "�L���"
+	;����g�p������̏�Ԃŕ���
+	IF COND("�^����s")
 		PRINTFORMW 
-	ELSEIF COND("仮性包茎")
+	ELSEIF COND("������s")
 		PRINTFORMW 
 	ENDIF
-CASE "豊胸薬"
-	;薬を使用した後の状態で分岐
-	SELECTCASE TALENT:巨乳
-	;並乳
+CASE "�L����"
+	;����g�p������̏�Ԃŕ���
+	SELECTCASE TALENT:����
+	;����
 	CASE 0
 		PRINTFORMW 
-	;巨乳
+	;����
 	CASE 1
 		PRINTFORMW 
-	;爆乳
+	;����
 	CASE 2
 		PRINTFORMW 
-	;超乳
+	;����
 	CASE IS >= 3
 		PRINTFORMW 
 	ENDSELECT
-CASE "貧乳薬"
-	;薬を使用した後の状態で分岐
-	SELECTCASE TALENT:巨乳
-	;並乳以下
+CASE "�n����"
+	;����g�p������̏�Ԃŕ���
+	SELECTCASE TALENT:����
+	;�����ȉ�
 	CASE 0
-		IF TALENT:貧乳
+		IF TALENT:�n��
 			PRINTFORMW 
-		;並乳
+		;����
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;巨乳
+	;����
 	CASE 1
 		PRINTFORMW 
-	;爆乳
+	;����
 	CASE 2
 		PRINTFORMW 
 	ENDSELECT
-CASE "巨人の薬"
-	;薬を使用した後の状態で分岐
-	IF TALENT:長身
+CASE "���l�̖�"
+	;����g�p������̏�Ԃŕ���
+	IF TALENT:���g
 		PRINTFORMW 
-	;普通身長
+	;���ʐg��
 	ELSE
 		PRINTFORMW 
 	ENDIF
-CASE "小人の薬"
-	;薬を使用した後の状態で分岐
-	IF TALENT:小柄
+CASE "���l�̖�"
+	;����g�p������̏�Ԃŕ���
+	IF TALENT:����
 		PRINTFORMW 
-	;普通身長
+	;���ʐg��
 	ELSE
 		PRINTFORMW 
 	ENDIF
-CASE "虹の薬"
-	;薬を使用した後の状態で分岐
-	SELECTCASE CONDS("肌の色")
-	CASE "褐色肌"
+CASE "���̖�"
+	;����g�p������̏�Ԃŕ���
+	SELECTCASE CONDS("���̐F")
+	CASE "���F��"
 		PRINTFORMW 
-	CASE "色白"
+	CASE "�F��"
 		PRINTFORMW 
-	CASE "青肌"
+	CASE "��"
 		PRINTFORMW 
-	;普通
+	;����
 	CASEELSE
 		PRINTFORMW 
 	ENDSELECT
-CASE "桃尻薬"
-	;薬を使用した後の状態で分岐
-	IF TALENT:巨尻 >= 2
+CASE "���K��"
+	;����g�p������̏�Ԃŕ���
+	IF TALENT:���K >= 2
 		PRINTFORMW 
-	ELSEIF TALENT:巨尻
+	ELSEIF TALENT:���K
 		PRINTFORMW 
-	;普通の大きさ
+	;���ʂ̑傫��
 	ELSE
 		PRINTFORMW 
 	ENDIF
-CASE "小尻薬"
-	;薬を使用した後の状態で分岐
-	IF TALENT:巨尻
+CASE "���K��"
+	;����g�p������̏�Ԃŕ���
+	IF TALENT:���K
 		PRINTFORMW 
-	ELSEIF TALENT:小尻
+	ELSEIF TALENT:���K
 		PRINTFORMW 
-	;普通の大きさ
+	;���ʂ̑傫��
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -4989,53 +4989,53 @@ CASE "小尻薬"
 ENDSELECT
 
 ;-------------------------------------------------
-;TARGET以外の立場で呼ばれた時の台詞全般
+;TARGET�ȊO�̗���ŌĂ΂ꂽ���̑䎌�S��
 ;-------------------------------------------------
 @GUEST_KOJO_K33, ARGS, ARG
 SELECTCASE ARGS
-CASE "調教相手に選ばれた"
+CASE "��������ɑI�΂ꂽ"
 
-CASE "助手に抜擢"
-	;初めて
-	IF EXP:ARG:助手経験 == 0
+CASE "����ɔ��F"
+	;���߂�
+	IF EXP:ARG:����o�� == 0
 
 	ELSE
 
 	ENDIF
 
-CASE "助手：主人にお掃除フェラ"
+CASE "����F��l�ɂ��|���t�F��"
 
-CASE "助手：パートナーにお掃除クンニ"
+CASE "����F�p�[�g�i�[�ɂ��|���N���j"
 
-CASE "助手：パートナーにお掃除Ａ舐め"
+CASE "����F�p�[�g�i�[�ɂ��|���`�r��"
 
-CASE "助手：主人にＰ恥垢お掃除フェラ"
+CASE "����F��l�ɂo�p�C���|���t�F��"
 
-CASE "助手：撮影開始"
+CASE "����F�B�e�J�n"
 
-CASE "助手：調教開始前の準備後台詞"
+CASE "����F�����J�n�O�̏�����䎌"
 
-CASE "館内調教：登場台詞"
+CASE "�ٓ������F�o��䎌"
 
-CASE "館内調教：ギャラリー増加台詞"
+CASE "�ٓ������F�M�������[�����䎌"
 
-CASE "館内調教：感想台詞"
+CASE "�ٓ������F���z�䎌"
 
-CASE "助手で性処理：おあずけ"
+CASE "����Ő������F��������"
 
-CASE "助手で性処理"
+CASE "����Ő�����"
 
-CASE "助手で性処理：事後"
+CASE "����Ő������F����"
 
-;COND("精液の優勢", ARG)で誰の子供を孕んでしまったかを判定できます
-;名前を出したい時には%COND("精液の優勢", ARG)%を用いてください
-CASE "受精確認"
+;COND("���t�̗D��", ARG)�ŒN�̎q����s��ł��܂������𔻒�ł��܂�
+;���O���o���������ɂ�%COND("���t�̗D��", ARG)%��p���Ă�������
+CASE "�󐸊m�F"
 
 ENDSELECT
 
 ;-------------------------------------------------
-;@単体エンディング関係(33をキャラ番号に置換)
-;通常のエンディングチェックの前に個別エンディングを判定
+;@�P�̃G���f�B���O�֌W(33���L�����ԍ��ɒu��)
+;�ʏ�̃G���f�B���O�`�F�b�N�̑O�ɌʃG���f�B���O�𔻒�
 ;-------------------------------------------------
 ;
 ;
@@ -5047,8 +5047,8 @@ ENDSELECT
 ;
 ;
 ;
-;★ここから先にはエンディングが記述されています★
-;ネタバレを避けたい方は閲覧しないようにご注意下さい。
+;�����������ɂ̓G���f�B���O���L�q����Ă��܂���
+;�l�^�o��������������͉{�����Ȃ��悤�ɂ����Ӊ������B
 ;
 ;
 ;
@@ -5086,51 +5086,42 @@ ENDSELECT
 ;
 ;
 @IS_SINGLE_ENDING_K33
-;エンディングを書いたら、下のRETURN 1のコメントアウト;を消してください
+;�G���f�B���O����������A����RETURN 1�̃R�����g�A�E�g;�������Ă�������
 ;RETURN 1
 
 @MENU_SINGLE_ENDING_K33
-;エンディングを書いたら、下のRETURN 0を消してください
+;�G���f�B���O����������A����RETURN 0�������Ă�������
 RETURN 0
 
-;ENDを選択する際の表示。下で満たしたEND条件に応じて全角21文字以内で好きに変えて良い
-STR:ＥＮＤタイトル = エンディングを迎える
+;END��I������ۂ̕\���B���Ŗ�������END�����ɉ����đS�p21�����ȓ��ōD���ɕς��ėǂ�
+STR:�d�m�c�^�C�g�� = �G���f�B���O���}����
 
-;魂の量によるEND
-SIF BASE:魂 >= 300
-	;ENDの番号_END名 となっている
-	;番号は1～60の範囲(でもできれば１から順に詰めて使用)の半角数字で、ＥＮＤ名は好きなものに変更してください
-	STR:エンディング += "1_ＥＮＤ名１/"
-;その他の条件(例えば淫乱)によるEND
-SIF TALENT:淫乱
-	STR:エンディング += "2_ＥＮＤ名２/"
-;魂の量とその他の条件(例えば相思相愛)によるEND
-SIF BASE:魂 >= 300 && TALENT:相思相愛
-	STR:エンディング += "3_ＥＮＤ名３/"
+;���̗ʂɂ��END
+SIF BASE:�� >= 300
+	;END�̔ԍ�_END�� �ƂȂ��Ă���
+	;�ԍ���1�`60�͈̔�(�ł��ł���΂P���珇�ɋl�߂Ďg�p)�̔��p�����ŁA�d�m�c���͍D���Ȃ��̂ɕύX���Ă�������
+	STR:�G���f�B���O += "1_�d�m�c���P/"
+;���̑��̏���(�Ⴆ�Έ���)�ɂ��END
+SIF TALENT:����
+	STR:�G���f�B���O += "2_�d�m�c���Q/"
+;���̗ʂƂ��̑��̏���(�Ⴆ�Α��v����)�ɂ��END
+SIF BASE:�� >= 300 && TALENT:���v����
+	STR:�G���f�B���O += "3_�d�m�c���R/"
 
 RETURN 1
 
 
-;ARGSには@MENU_SINGLE_ENDING_K1で設定したEND名のどれかが入っている
-;見たENDはCEVENTで記録される
-;例）ＥＮＤ名１を閲覧した場合は CEVENT("ＥＮＤ名１") = 1 となる
+;ARGS�ɂ�@MENU_SINGLE_ENDING_K1�Őݒ肵��END���̂ǂꂩ�������Ă���
+;����END��CEVENT�ŋL�^�����
+;��j�d�m�c���P���{�������ꍇ�� CEVENT("�d�m�c���P") = 1 �ƂȂ�
 @SINGLE_ENDING_K33, ARGS
 SELECTCASE ARGS
-CASE "ＥＮＤ名１"
-	PRINTFORMW ＥＮＤ名１の本文です
-CASE "ＥＮＤ名２"
-	PRINTFORMW ＥＮＤ名２の本文です
-CASE "ＥＮＤ名３"
-	PRINTFORMW ＥＮＤ名３の本文です
+CASE "�d�m�c���P"
+	PRINTFORMW �d�m�c���P�̖{���ł�
+CASE "�d�m�c���Q"
+	PRINTFORMW �d�m�c���Q�̖{���ł�
+CASE "�d�m�c���R"
+	PRINTFORMW �d�m�c���R�̖{���ł�
 ENDSELECT
 RETURN 1
-
-;-------------------------------------------------
-;このキャラの勧誘条件フラグ
-;もしも特定条件を満たしていないと勧誘できないキャラにしたい場合には、コメントアウト ; を消して条件を設定してください
-;RETURN 0されると勧誘不可能になります
-;勧誘可能な条件を満たしている際にはRETURN 1するようにして下さい
-;-------------------------------------------------
-;@IS_APPEARANCE_K33
-;RETURN 0
 
