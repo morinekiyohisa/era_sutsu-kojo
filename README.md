@@ -16,29 +16,29 @@
 <td>需翻譯</td>
 <td>149</td>
 <td>12</td>
-<td>487</td>
-<td>648</td>
+<td>529</td>
+<td>690</td>
 </tr>
 <tr>
 <td>已翻譯</td>
 <td>149</td>
 <td>12</td>
-<td>26</td>
-<td>187</td>
+<td>60</td>
+<td>221</td>
 </tr>
 <tr>
 <td>剩餘</td>
 <td></td>
 <td></td>
 <td></td>
-<td>461</td>
+<td>469</td>
 </tr> 
 <tr>
 <td>完成進度</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>29%</td>
+<td>32%</td>
 </tr>
 </tbody>
 </table>
@@ -50,6 +50,7 @@
 >Daily文件487句已漢化26句。
 
 ---------------------------------------
+2020/5/18
+>完成Daily Print_Str系的翻譯
 
-
-
+>明天考試休息
