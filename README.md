@@ -28,9 +28,9 @@
 </tr>
 <tr>
 <td>剩餘</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0</td>
+<td>0</td>
+<td>415</td>
 <td>415</td>
 </tr> 
 <tr>
